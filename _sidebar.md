@@ -1,6 +1,7 @@
 <!-- _sidebar.md -->
 * 写在最前面
   * [前言](README.md)
+  * [本站搭建](./create_blog/%E5%9F%BA%E4%BA%8Edocsify%E7%9A%84%E7%AE%80%E6%B4%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA.md)
 
 * 随笔
   * [2023年再读《孔乙己》有感](./docs/eassys/2023%E5%B9%B4%E5%86%8D%E8%AF%BB%E3%80%8A%E5%AD%94%E4%B9%99%E5%B7%B1%E3%80%8B%E6%9C%89%E6%84%9F.md)
@@ -14,7 +15,7 @@
   * [Redis开发规范——键值设计](./docs/codeguides/Redis%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94%E9%94%AE%E5%80%BC%E8%AE%BE%E8%AE%A1.md)
 
 * Software Design Pattern
-  * [设计模式概述](./docs/%08design_pattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.md)
+  * [设计模式概述](./docs/design_pattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.md)
 
 
 * Code Tips
