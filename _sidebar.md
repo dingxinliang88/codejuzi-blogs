@@ -13,6 +13,7 @@
 
 * 开发规范
   * [Redis开发规范——键值设计](./docs/codeguides/Redis%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94%E9%94%AE%E5%80%BC%E8%AE%BE%E8%AE%A1.md)
+  * [Redis开发规范——命令使用](./docs/codeguides/Redis%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8.md)
 
 * Software Design Pattern
   * [设计模式概述](./docs/design_pattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.md)
