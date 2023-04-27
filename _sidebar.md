@@ -33,3 +33,8 @@
   * [Linux安装PostgreSQL14](./docs/envconfig/Linux%E5%AE%89%E8%A3%85PostgreSQL.md)
   * [Windows安装MySQL8](./docs/envconfig/Windows%E5%AE%89%E8%A3%85MySQL8.md)
   * [Windows安装Maven](./docs/envconfig/Windows%E5%AE%89%E8%A3%85Maven.md)
+
+
+* 数据结构
+  * [stack](./codes/datastructure/%E6%A0%88%26%26%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98.md)
+  * [queue](./codes/datastructure/%E9%98%9F%E5%88%97%26%26%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.md)
