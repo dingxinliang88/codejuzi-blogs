@@ -15,6 +15,7 @@
 
 
 * Code Tips
+  * [CodeTips](./docs/codetips/CodeTips.md)
   * [帖子评论表设计](./docs/codetips/%E5%B8%96%E5%AD%90%E8%AF%84%E8%AE%BA%E8%A1%A8%E8%AE%BE%E8%AE%A1.md)
 
 * GitDocs
