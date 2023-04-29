@@ -21,6 +21,10 @@
 * 面试题（CodeJuzi）
   * [每日一题整理](./docs/jobhunter/my_interview_qa.md)
 
+* 技术书籍阅读
+  * 《Redis设计与实现》（2014.4）
+    * [简单动态字符串SDS](./books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E7%AE%80%E5%8D%95%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2.md)
+
 * Code Tips
   * [CodeTips](./docs/codetips/CodeTips.md)
   * [帖子评论表设计](./docs/codetips/%E5%B8%96%E5%AD%90%E8%AF%84%E8%AE%BA%E8%A1%A8%E8%AE%BE%E8%AE%A1.md)
