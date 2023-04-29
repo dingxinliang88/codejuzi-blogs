@@ -16,7 +16,7 @@
 
 ## 一、初始化项目
 
-> 这里可以按照docsify的[官方文档](https://docsify.js.org/#/zh-cn/quickstart)去做一个快速上手
+> 这里可以按照docsify的[官方文档](https://docsify.js.org/#/quickstart)去做一个快速上手
 
 全局安装 `docsify-cli` 工具，可以方便地创建及在本地预览生成的文档。
 

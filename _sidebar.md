@@ -18,6 +18,8 @@
 * Software Design Pattern
   * [设计模式概述](./docs/design_pattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.md)
 
+* 面试题（CodeJuzi）
+  * [每日一题整理](./docs/jobhunter/my_interview_qa.md)
 
 * Code Tips
   * [CodeTips](./docs/codetips/CodeTips.md)
@@ -35,7 +37,7 @@
   * [Windows安装MySQL8](./docs/envconfig/Windows%E5%AE%89%E8%A3%85MySQL8.md)
   * [Windows安装Maven](./docs/envconfig/Windows%E5%AE%89%E8%A3%85Maven.md)
 
-
 * 数据结构
+  * [linked-list](./codes/datastructure/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA.md)
   * [stack](./codes/datastructure/%E6%A0%88%26%26%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98.md)
   * [queue](./codes/datastructure/%E9%98%9F%E5%88%97%26%26%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.md)

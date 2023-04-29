@@ -13,6 +13,12 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
 
+    <!-- sidebar collapse -->
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"
+    />
+
     <!-- 默认主题 -->
     <link rel="stylesheet" href="./themes/vue.css" />
 
@@ -25,7 +31,7 @@
 
   <body>
     <!-- 定义加载时候的动作 -->
-    <div id="app">正在加载中...</div>
+    <div id="app">不要着急，加载会……</div>
     <script>
       window.$docsify = {
         // 项目名称
@@ -34,6 +40,11 @@
         repo: "https://github.com/dingxinliang88",
         // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
         loadSidebar: true,
+        alias: {
+          "/.*/_sidebar.md": "/_sidebar.md",
+        },
+        subMaxLevel: 3,
+        sidebarDisplayLevel: 1, // set sidebar display level
         // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
         loadNavbar: true,
         // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
@@ -59,6 +70,22 @@
           hideOtherSidebarContent: false,
           namespace: "CodeJuziの技术文档",
         },
+        pagination: {
+          previousText: "上一章节",
+          nextText: "下一章节",
+          crossChapter: true,
+          crossChapterText: true,
+        },
+        count: {
+          countable: true,
+          position: "top",
+          margin: "10px",
+          float: "right",
+          fontsize: "0.9em",
+          color: "rgb(90,90,90)",
+          language: "chinese",
+          isExpected: true,
+        },
       };
     </script>
     <!-- docsify的js依赖 -->
@@ -71,6 +98,10 @@
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <!--在所有的代码块上添加一个简单的Click to copy按钮来允许用户从你的文档中轻易地复制代码-->
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <!-- 分页插件 -->
+    <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <!-- 字数统计 -->
+    <script src="//unpkg.com/docsify-count/dist/countable.min.js"></script>
     <!-- 代码高亮 -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
@@ -79,5 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-properties.min.js"></script>
+    <!-- sidebar可折叠 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   </body>
 </html>
