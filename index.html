@@ -95,6 +95,18 @@
           language: "chinese",
           isExpected: true,
         },
+        /* date */
+        timeUpdater: {
+          text: "📅 Latest Update Time: {docsify-updated}",
+          formatUpdated: "{YYYY}/{MM}/{DD}",
+          whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
+        },
+        /* process */
+        progress: {
+          position: "top",
+          color: "var(--theme-color,#42b983)",
+          height: "3px",
+        },
       };
     </script>
     <!-- docsify的js依赖 -->
@@ -122,5 +134,9 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
     <!-- sidebar可折叠 -->
     <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+    <!-- date -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-updated/src/time-updater.min.js"></script>
+    <!-- 进度条 -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
   </body>
 </html>
