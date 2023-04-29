@@ -34,6 +34,11 @@
   * [由浅入深学Git_2](./docs/gitdocs/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%AD%A6Git_2.md)
   * [由浅入深学Git_3](./docs/gitdocs/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%AD%A6Git_3.md)
 
+* SQL
+  * exercise
+    * [建表语句](./codes/sql/exercise/tables.md)
+    * [SQL练习](./codes/sql/exercise/sql_exercise.md)
+
 * 环境配置
   * [MacOS配置JDK环境](./docs/envconfig/MacOS%E9%85%8D%E7%BD%AEJDK%E7%8E%AF%E5%A2%83.md)
   * [MacOS配置Maven环境](./docs/envconfig/MacOS%E9%85%8D%E7%BD%AEMaven%E7%8E%AF%E5%A2%83.md)
