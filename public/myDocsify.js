@@ -59,7 +59,7 @@ window.$docsify = {
   },
   /* date */
   timeUpdater: {
-    text: "📅 Latest Update Time: {docsify-updated}",
+    text: "📅 <div align='left' width='200px' style='color:gray;font-size:16px'>Posted @ {docsify-updated}</div>",
     formatUpdated: "{YYYY}/{MM}/{DD}",
     whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
   },
