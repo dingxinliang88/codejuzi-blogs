@@ -18,3 +18,61 @@ Java反射的缺点：
 - 反射会涉及到动态类型的解析，因此JVM无法对这些代码进行优化，导致性能要比非反射调用要低
 - 使用反射之后，代码的可读性会降低
 - 反射可以绕过一些限制访问的属性和方法(private, protected)，可能会导致破坏了代码本身的封装性和抽象性
+
+## Integer a1 = 100; Integer a2 = 100; a1 == a2 的运行结果？
+
+> 考查知识点：`==`表示内存地址匹配、装箱拆箱、Integer内部设计原理
+>
+> 1. `Integer a1 = 100`，把一个int数字赋值给一个封装类型，Java会默认进行装箱操作，即调用了`Integer.valueOf()`方法，把数字100包装成封装类型`Integer`
+>
+> 2. 在`Integer`内部设计中，使用了**享元设计模式**，享元模式的核心思想是通过复用对象，减少对象的创建数量，从而减少内存占用和提升性能。
+>
+>    `Integer`内部维护了一个`IntegerCache`，其缓存了-128 \~ 127这个区间的数值对应的Integer类型。
+>
+>    ```java
+>    private static class IntegerCache {
+>      static final int low = -128;
+>      static final int high;
+>      static final Integer cache[];
+>    
+>      static {
+>        // high value may be configured by property
+>        int h = 127;
+>        String integerCacheHighPropValue =
+>          VM.getSavedProperty("java.lang.Integer.IntegerCache.high");
+>        if (integerCacheHighPropValue != null) {
+>          try {
+>            int i = parseInt(integerCacheHighPropValue);
+>            i = Math.max(i, 127);
+>            // Maximum array size is Integer.MAX_VALUE
+>            h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
+>          } catch( NumberFormatException nfe) {
+>            // If the property cannot be parsed into an int, ignore it.
+>          }
+>        }
+>        high = h;
+>    
+>        cache = new Integer[(high - low) + 1];
+>        int j = low;
+>        for(int k = 0; k < cache.length; k++)
+>          cache[k] = new Integer(j++);
+>    
+>        // range [-128, 127] must be interned (JLS7 5.1.7)
+>        assert IntegerCache.high >= 127;
+>      }
+>    
+>      private IntegerCache() {}
+>    }
+>    ```
+>
+>    程序调用`valueOf`方法，如果数字是在-128 \~ 127之间就直接在cache缓存数组中去取Integer对象，否则就会创建一个新的对象
+>
+>    ```java
+>    public static Integer valueOf(int i) {
+>      if (i >= IntegerCache.low && i <= IntegerCache.high)
+>        return IntegerCache.cache[i + (-IntegerCache.low)];
+>      return new Integer(i);
+>    }
+>    ```
+
+`a1==a2`的执行结果为`true`，因为`Integer`内部用到了享元模式，针对-128 \~ 127之间的数字做了缓存，使用`Integer a1 = 100`这个方式赋值时，Java默认会通过`valueOf()`对100这个数字进行装箱操作，从而触发缓存机制，使得a1和a2指向了同一个Integer地址空间。
