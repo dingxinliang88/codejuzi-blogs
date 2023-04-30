@@ -5,6 +5,7 @@ window.$docsify = {
   repo: "https://github.com/dingxinliang88",
   // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
   loadSidebar: true,
+  // autoHeader: true,
   alias: {
     "../.*/_sidebar.md": "../_sidebar.md",
   },
