@@ -19,10 +19,14 @@ window.$docsify = {
   mergeNavbar: true,
   // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
   coverpage: true,
+  onlyCover: true,
   // 最大支持渲染的标题层级
   maxLevel: 5,
   // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级（建议配置为2-4）
   subMaxLevel: 4,
+  themeable: {
+    readyTransition: true, // default
+  },
   /*搜索相关设置*/
   search: {
     maxAge: 86400000, // 过期时间，单位毫秒，默认一天

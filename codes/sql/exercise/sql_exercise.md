@@ -105,7 +105,7 @@ mysql> select t.*, e.ename, e.sal
 ```
 
 ## 3、取得部门中（所有人的）平均的薪水等级
-> #### 辨析
+> ### 辨析
 > - 平均的薪水等级：先计算每一个薪水的等级，然后找出薪水等级的平均值
 > - 平均薪水的等级：先计算平均薪水，然后找出每个平均薪水的等级值
 
@@ -317,3 +317,168 @@ mysql> select deptno, avg(sal) as avgSal
 +--------+-------------+
 1 row in set (0.00 sec)
 ```
+
+## 6、取得平均薪水最高的部门的部门名称
+
+dept表和emp表联合查询，条件：`e.deptno = d.deptno`，根据部门名称分组，按照平均薪水降序排序取第一个
+
+```sql
+select 
+	d.dname,avg(e.sal) as avgsal 
+from 
+	dept d
+join
+	emp e
+on
+	e.deptno = d.deptno
+group by 
+	d.dname
+order by 
+	avgsal desc 
+limit 
+	1;
+```
+
+```sh
+mysql> select d.dname, avg(e.sal) as avgSal
+    -> from dept d
+    -> join emp e
+    -> on e.deptno = d.deptno 
+    -> group by d.dname
+    -> order by avgSal desc
+    -> limit 1;
++------------+-------------+
+| dname      | avgSal      |
++------------+-------------+
+| ACCOUNTING | 2916.666667 |
++------------+-------------+
+1 row in set (0.00 sec)
+```
+
+## 7、求平均薪水的等级最低的部门的部门名称
+
+> 薪水等级：
+> - 1: 700 ~ 1200
+> - 2: 1201 ~ 1400
+> - 3: 1401 ~ 2000
+> - 4: 2001 ~ 3000
+> - 5: 3001 ~ 9999
+
+Step1: 找出每个部门的平均薪水
+
+```sql
+select deptno, avg(sal) as avgSal from emp group by deptno;
+```
+
+```sh
+mysql> select deptno, avg(sal) as avgSal from emp group by deptno;
++--------+-------------+
+| deptno | avgSal      |
++--------+-------------+
+|     20 | 2175.000000 |
+|     30 | 1566.666667 |
+|     10 | 2916.666667 |
++--------+-------------+
+3 rows in set (0.00 sec)
+```
+
+Step2: 找出每个部门平均薪水的等级
+
+将Stpe1的查询结果t与`salgrade`表联查，条件：`t.avgSal between s.losal and s.hisal`，然后按照薪水等级升序排序取第一个
+
+```sql
+select 
+	t.*,s.grade
+from
+	(select d.dname,avg(sal) as avgsal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
+join
+	salgrade s
+on
+	t.avgsal between s.losal and s.hisal;
+order by 
+	s.grade
+limit 
+	1;
+```
+
+```sh
+mysql> select t.*, s.grade
+    -> from (select d.dname, avg(e.sal) as avgSal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
+    -> join salgrade s
+    -> on t.avgSal between s.losal and s.hisal
+	-> order by s.grade
+	-> limit 1;
++-------+-------------+-------+
+| dname | avgSal      | grade |
++-------+-------------+-------+
+| SALES | 1566.666667 |     3 |
++-------+-------------+-------+
+1 row in set (0.00 sec)
+```
+
+> 或者
+>
+> ```sql
+> select 
+> 	t.*,s.grade
+> from
+> 	(select d.dname,avg(sal) as avgsal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
+> join
+> 	salgrade s
+> on
+> 	t.avgsal between s.losal and s.hisal
+> where
+> 	s.grade = (select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal);
+> ```
+
+> ### 思考：最低等级怎么看？
+>
+> 平均薪水最低的对应的等级一定最低
+>
+> ```sql
+> select 
+> 	avg(sal) as avgsal 
+> from 
+> 		emp 
+> group by 
+> 		deptno 
+> order by 
+>   	avgsal 
+> limit 
+>   	1;
+> ```
+>
+> ```sh
+> mysql> select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1;
+> +-------------+
+> | avgsal      |
+> +-------------+
+> | 1566.666667 |
+> +-------------+
+> 1 row in set (0.00 sec)
+> ```
+>
+> 
+>
+> ```sql
+> select grade
+> from salgrade
+> where (
+>   select avg(sal) as avgsal
+>   from emp
+>   group by deptno
+>   order by avgsal asc
+>   limit 1
+> ) between losal and hisal;
+> ```
+>
+> ```sh
+> mysql> select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal;
+> +-------+
+> | grade |
+> +-------+
+> |     3 |
+> +-------+
+> 1 row in set (0.00 sec)
+> ```
+>

@@ -8,3 +8,7 @@
 <!-- [GitHub](https://github.com/dingxinliang88) -->
 [关于作者](ABOUTME.md)
 [开始阅读](README.md)
+
+<!-- background color -->
+
+<!-- ![color](#292929) -->
