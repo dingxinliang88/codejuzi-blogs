@@ -66,6 +66,15 @@ window.$docsify = {
   //   formatUpdated: "{YYYY}/{MM}/{DD}",
   //   whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
   // },
+  formatUpdated: "{YYYY}/{MM}/{DD} {HH}:{mm}",
+
+  plugins: [
+    function (hook, vm) {
+      hook.beforeEach(function (html) {
+        return html + "\n\n\n\n----\n" + "📅Last modified: {docsify-updated}";
+      });
+    },
+  ],
   /* process */
   progress: {
     position: "top",
