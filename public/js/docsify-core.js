@@ -10,7 +10,7 @@ window.$docsify = {
     "../.*/_sidebar.md": "../_sidebar.md",
   },
   subMaxLevel: 3,
-  sidebarDisplayLevel: 0, // set sidebar display level
+  sidebarDisplayLevel: 1, // set sidebar display level
   auto2top: true,
   notFoundPage: "../_404.md",
   // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
@@ -19,7 +19,7 @@ window.$docsify = {
   mergeNavbar: true,
   // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
   coverpage: true,
-  onlyCover: true,
+  // onlyCover: true,
   // 最大支持渲染的标题层级
   maxLevel: 5,
   // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级（建议配置为2-4）
@@ -61,11 +61,11 @@ window.$docsify = {
     isExpected: true,
   },
   /* date */
-  timeUpdater: {
-    text: "<div align='left' width='200px' style='color:gray;font-size:16px'>📅Posted @ {docsify-updated}</div>",
-    formatUpdated: "{YYYY}/{MM}/{DD}",
-    whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
-  },
+  // timeUpdater: {
+  //   text: "<div align='left' width='200px' style='color:gray;font-size:16px'>📅Posted @ {docsify-updated}</div>",
+  //   formatUpdated: "{YYYY}/{MM}/{DD}",
+  //   whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
+  // },
   /* process */
   progress: {
     position: "top",
