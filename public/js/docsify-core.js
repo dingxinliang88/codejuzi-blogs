@@ -71,7 +71,7 @@ window.$docsify = {
   plugins: [
     function (hook, vm) {
       hook.beforeEach(function (html) {
-        return html + "\n\n\n\n----\n" + "📅Last modified: {docsify-updated}";
+        return html + "\n\n\n\n----\n" + "📅 Post @ {docsify-updated}";
       });
     },
   ],
