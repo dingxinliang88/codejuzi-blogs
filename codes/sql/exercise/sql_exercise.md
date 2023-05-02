@@ -27,14 +27,17 @@ Step2: 将Step1查询结果当做一张临时表t
 t表和emp表联合查询，条件：`t.deptno=emp.deptno and t.maxSal=emp.sal`
 
 ```sql
-select 
-	e.ename, t.*
-from 
-	emp e
-join
-	(select deptno,max(sal) as maxSal from emp group by deptno) t
-on
-	t.deptno = e.deptno and t.maxSal = e.sal;
+select e.ename, t.*
+from emp e
+    join (
+        select
+            deptno,
+            max(sal) as maxSal
+        from emp
+        group by
+            deptno
+    ) t on t.deptno = e.deptno
+    and t.maxSal = e.sal;
 ```
 
 ```sh
@@ -76,14 +79,17 @@ Step2: 将Step1的查询结果当做一张临时表t
 t表和emp表联合查询，条件：`t.deptno=emp.deptno and t.avgSal < emp.sal`
 
 ```sql
-select 
-	t.*, e.ename, e.sal
-from
-	emp e
-join
-	(select deptno,avg(sal) as avgSal from emp group by deptno) t
-on
-	e.deptno = t.deptno and e.sal > t.avgSal;
+select t.*, e.ename, e.sal
+from emp e
+    join (
+        select
+            deptno,
+            avg(sal) as avgSal
+        from emp
+        group by
+            deptno
+    ) t on e.deptno = t.deptno
+    and e.sal > t.avgSal;
 ```
 
 ```sh
@@ -114,14 +120,13 @@ Step1: 找出每个人的薪水等级
 emp表和salgrade表联合查询，条件：`e.sal between s.losal and s.hisal`
 
 ```sql
-select 
-	e.ename,e.sal,e.deptno,s.grade
-from
-	emp e
-join
-	salgrade s
-on
-	e.sal between s.losal and s.hisal;
+select
+    e.ename,
+    e.sal,
+    e.deptno,
+    s.grade
+from emp e
+    join salgrade s on e.sal between s.losal and s.hisal;
 ```
 
 ```sh
@@ -153,16 +158,10 @@ mysql> select e.ename, e.sal, e.deptno, s.grade
 Step2: 基于Step1查询的结果按照deptno分组，求取grade的平均值
 
 ```sql
-select 
-	e.deptno,avg(s.grade)
-from
-	emp e
-join
-	salgrade s
-on
-	e.sal between s.losal and s.hisal
-group by
-	e.deptno;
+select e.deptno, avg(s.grade)
+from emp e
+    join salgrade s on e.sal between s.losal and s.hisal
+group by e.deptno;
 ```
 
 ```sh
@@ -200,7 +199,13 @@ mysql> select ename, sal from emp order by sal desc limit 1;
 ### 方案二：表的自连接
 
 ```sql
-select ename, sal from emp where sal not in(select distinct a.sal from emp a join emp b on a.sal < b.sal);
+select ename, sal
+from emp
+where sal not in(
+        select distinct a.sal
+        from emp a
+            join emp b on a.sal < b.sal
+    );
 ```
 
 子查询使用了联结（JOIN）操作，将emp表自身连接两次（a 和 b），并找出a表中薪资比b表中薪资低的记录。然后，使用 DISTINCT关键字去重，以避免在主查询中出现重复的低薪数据集合。主查询从 emp 表中找出所有不在这个子查询结果集合中的薪资值，也就是所有薪资水平处于高位s员工薪资数据。
@@ -244,7 +249,13 @@ mysql> select deptno, avg(sal) as avgSal from emp group by deptno;
 Step2: 降序取第一个
 
 ```sql
-select deptno, avg(sal) as avgSal from emp group by deptno order by avgSal limit 1;
+select
+    deptno,
+    avg(sal) as avgSal
+from emp
+group by deptno
+order by avgSal
+limit 1;
 ```
 
 ```sh
@@ -279,7 +290,14 @@ mysql> select deptno, avg(sal) as avgSal from emp group by deptno;
 Step2: 找出Step1查询结果avgSal最大的值
 
 ```sql
-select max(t.avgSal) from (select deptno, avg(sal) as avgSal from emp group by deptno) t;
+select max(t.avgSal)
+from (
+        select
+            deptno,
+            avg(sal) as avgSal
+        from emp
+        group by deptno
+    ) t;
 ```
 
 ```sh
@@ -295,14 +313,19 @@ mysql> select max(t.avgSal) from (select deptno, avg(sal) as avgSal from emp gro
 Step3: 按照deptno分组，找出与Step2查询结果匹配的最大平均薪水
 
 ```sql
-select 
-	deptno,avg(sal) as avgSal 
-from 
-	emp 
-group by 
-	deptno
-having
-	avgSal = (select max(t.avgSal) from (select avg(sal) as avgSal from emp group by deptno) t);
+select
+    deptno,
+    avg(sal) as avgSal
+from emp
+group by deptno
+having avgSal = (
+        select max(t.avgSal)
+        from (
+                select avg(sal) as avgSal
+                from emp
+                group by deptno
+            ) t
+    );
 ```
 
 ```sh
@@ -323,20 +346,14 @@ mysql> select deptno, avg(sal) as avgSal
 dept表和emp表联合查询，条件：`e.deptno = d.deptno`，根据部门名称分组，按照平均薪水降序排序取第一个
 
 ```sql
-select 
-	d.dname,avg(e.sal) as avgsal 
-from 
-	dept d
-join
-	emp e
-on
-	e.deptno = d.deptno
-group by 
-	d.dname
-order by 
-	avgsal desc 
-limit 
-	1;
+select
+    d.dname,
+    avg(e.sal) as avgsal
+from dept d
+    join emp e on e.deptno = d.deptno
+group by d.dname
+order by avgsal desc
+limit 1;
 ```
 
 ```sh
@@ -387,18 +404,18 @@ Step2: 找出每个部门平均薪水的等级
 将Stpe1的查询结果t与`salgrade`表联查，条件：`t.avgSal between s.losal and s.hisal`，然后按照薪水等级升序排序取第一个
 
 ```sql
-select 
-	t.*,s.grade
-from
-	(select d.dname,avg(sal) as avgsal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
-join
-	salgrade s
-on
-	t.avgsal between s.losal and s.hisal;
-order by 
-	s.grade
-limit 
-	1;
+select t.*, s.grade
+from (
+        select
+            d.dname,
+            avg(sal) as avgsal
+        from emp e
+            join dept d on e.deptno = d.deptno
+        group by d.dname
+    ) t
+    join salgrade s on t.avgsal between s.losal and s.hisal
+order by s.grade
+limit 1;
 ```
 
 ```sh
@@ -419,16 +436,27 @@ mysql> select t.*, s.grade
 > 或者
 >
 > ```sql
-> select 
-> 	t.*,s.grade
-> from
-> 	(select d.dname,avg(sal) as avgsal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
-> join
-> 	salgrade s
-> on
-> 	t.avgsal between s.losal and s.hisal
-> where
-> 	s.grade = (select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal);
+> select t.*, s.grade
+> from (
+>         select
+>             d.dname,
+>             avg(sal) as avgsal
+>         from emp e
+>             join dept d on e.deptno = d.deptno
+>         group by d.dname
+>     ) t
+>     join salgrade s on t.avgsal between s.losal and s.hisal
+> where s.grade = (
+>         select grade
+>         from salgrade
+>         where (
+>                 select avg(sal) as avgsal
+>                 from emp
+>                 group by deptno
+>                 order by avgsal asc
+>                 limit 1
+>             ) between losal and hisal
+>     );
 > ```
 
 > ### 思考：最低等级怎么看？
@@ -436,49 +464,285 @@ mysql> select t.*, s.grade
 > 平均薪水最低的对应的等级一定最低
 >
 > ```sql
-> select 
-> 	avg(sal) as avgsal 
-> from 
-> 		emp 
-> group by 
-> 		deptno 
-> order by 
->   	avgsal 
-> limit 
->   	1;
+> select avg(sal) as avgsal
+> from emp
+> group by deptno
+> order by avgsal
+> limit 1;
 > ```
->
-> ```sh
+> 
+>   ```sh
 > mysql> select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1;
-> +-------------+
+>   +-------------+
 > | avgsal      |
-> +-------------+
+>+-------------+
 > | 1566.666667 |
 > +-------------+
 > 1 row in set (0.00 sec)
 > ```
->
 > 
->
+> 
+> 
 > ```sql
 > select grade
-> from salgrade
+>from salgrade
 > where (
->   select avg(sal) as avgsal
->   from emp
->   group by deptno
->   order by avgsal asc
->   limit 1
-> ) between losal and hisal;
-> ```
->
-> ```sh
-> mysql> select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal;
+>        select avg(sal) as avgsal
+>         from emp
+>         group by deptno
+>         order by avgsal asc
+>         limit 1
+>       ) between losal and hisal;
+>   ```
+>   
+>   ```sh
+>   mysql> select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal;
 > +-------+
 > | grade |
-> +-------+
+>+-------+
 > |     3 |
 > +-------+
 > 1 row in set (0.00 sec)
 > ```
+
+
+## 8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名
+
+> ```sh
+> mysql> select distinct(mgr) from emp where mgr is not null;
+> +------+
+> | mgr  |
+> +------+
+> | 7902 |
+> | 7698 |
+> | 7839 |
+> | 7566 |
+> | 7788 |
+> | 7782 |
+> +------+
+> 6 rows in set (0.00 sec)
+> ``` 
+> 员工编号没有以上范围出现的都是普通员工
 >
+
+Step1: 找出普通员工的最高薪水
+
+📢注意：not in在使用的时候，后面的范围一定要排除null
+
+```sql
+select max(sal) as maxSal
+from emp
+where empno not in (
+        select distinct(mgr)
+        from emp
+        where mgr is not null
+    );
+```
+
+
+```sh
+mysql> select max(sal) as maxSal from emp where empno not in (select distinct(mgr) from emp where mgr is not null);
++---------+
+| maxSal  |
++---------+
+| 1600.00 |
++---------+
+1 row in set (0.00 sec)
+```
+
+Step2: 找出工资高于Step1查出的maxSal
+
+```sql
+select ename, sal
+from emp
+where sal > (
+        select max(sal) as maxSal
+        from emp
+        where empno not in (
+                select distinct(mgr)
+                from emp
+                where mgr is not null
+            )
+    );
+```
+
+```sh
+mysql> select ename, sal from emp where sal > (select max(sal) as maxSal from emp where empno not in (select distinct(mgr) from emp where mgr is not null));
++-------+---------+
+| ename | sal     |
++-------+---------+
+| JONES | 2975.00 |
+| BLAKE | 2850.00 |
+| CLARK | 2450.00 |
+| SCOTT | 3000.00 |
+| KING  | 5000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+6 rows in set (0.00 sec)
+```
+
+## 9、取得薪水最高的前五名员工
+
+```sql
+select ename, sal from emp order by sal desc limit 5;
+```
+
+```sh
+mysql> select ename, sal from emp order by sal desc limit 5;
++-------+---------+
+| ename | sal     |
++-------+---------+
+| KING  | 5000.00 |
+| SCOTT | 3000.00 |
+| FORD  | 3000.00 |
+| JONES | 2975.00 |
+| BLAKE | 2850.00 |
++-------+---------+
+5 rows in set (0.00 sec)
+```
+
+
+## 10、取得薪水最高的第六到第十名员工
+
+```sql
+select ename, sal from emp order by sal desc limit 5, 5;
+```
+
+```sh
+mysql> select ename, sal from emp order by sal desc limit 5, 5;
++--------+---------+
+| ename  | sal     |
++--------+---------+
+| CLARK  | 2450.00 |
+| ALLEN  | 1600.00 |
+| TURNER | 1500.00 |
+| MILLER | 1300.00 |
+| WARD   | 1250.00 |
++--------+---------+
+5 rows in set (0.00 sec)
+```
+
+## 11、找出最后入职的5名员工
+
+日期可以升序也可以降序
+
+```sql
+select ename, hiredate from emp order by hiredate desc limit 5;
+```
+
+
+```sh
+mysql> select ename, hiredate from emp order by hiredate desc limit 5;
++--------+------------+
+| ename  | hiredate   |
++--------+------------+
+| ADAMS  | 1987-05-23 |
+| SCOTT  | 1987-04-19 |
+| MILLER | 1982-01-23 |
+| FORD   | 1981-12-03 |
+| JAMES  | 1981-12-03 |
++--------+------------+
+5 rows in set (0.00 sec)
+```
+
+## 12、取得每个薪水等级有多少员工
+
+Step1: 找出每个员工的薪水等级
+
+```sql
+select e.ename, e.sal, s.grade
+from emp e
+    join salgrade s on e.sal between s.losal and s.hisal;
+```
+
+```sh
+mysql> select e.ename, e.sal, s.grade 
+    -> from emp e
+    -> join salgrade s
+    -> on e.sal between s.losal and s.hisal;
++--------+---------+-------+
+| ename  | sal     | grade |
++--------+---------+-------+
+| SMITH  |  800.00 |     1 |
+| ALLEN  | 1600.00 |     3 |
+| WARD   | 1250.00 |     2 |
+| JONES  | 2975.00 |     4 |
+| MARTIN | 1250.00 |     2 |
+| BLAKE  | 2850.00 |     4 |
+| CLARK  | 2450.00 |     4 |
+| SCOTT  | 3000.00 |     4 |
+| KING   | 5000.00 |     5 |
+| TURNER | 1500.00 |     3 |
+| ADAMS  | 1100.00 |     1 |
+| JAMES  |  950.00 |     1 |
+| FORD   | 3000.00 |     4 |
+| MILLER | 1300.00 |     2 |
++--------+---------+-------+
+14 rows in set (0.00 sec)
+```
+
+Step2: 按照薪水等级分组统计
+
+```sql
+select s.grade, count(1)
+from emp e
+    join salgrade s on e.sal between s.losal and s.hisal
+group by s.grade;
+```
+
+```sh
+mysql> select s.grade, count(1) 
+    -> from emp e
+    -> join salgrade s
+    -> on e.sal between s.losal and s.hisal
+    -> group by s.grade;
++-------+----------+
+| grade | count(1) |
++-------+----------+
+|     1 |        3 |
+|     3 |        2 |
+|     2 |        3 |
+|     4 |        5 |
+|     5 |        1 |
++-------+----------+
+5 rows in set (0.00 sec)
+```
+
+## 13、列出所有员工及领导的姓名
+
+```sql
+select
+    a.ename '员工',
+    b.ename '领导'
+from emp a
+    left join emp b on a.mgr = b.empno;
+```
+
+这里使用`left join`是为了保证员工是都被查询到的，因为最顶级的领导是没有领导的，具体的可以观察下面查询结果
+`| KING   | NULL   |`
+
+```sh
+mysql> select a.ename '员工', b.ename '领导'
+    -> from emp a
+    -> left join emp b
+    -> on a.mgr = b.empno;
++--------+--------+
+| 员工   | 领导   |
++--------+--------+
+| SMITH  | FORD   |
+| ALLEN  | BLAKE  |
+| WARD   | BLAKE  |
+| JONES  | KING   |
+| MARTIN | BLAKE  |
+| BLAKE  | KING   |
+| CLARK  | KING   |
+| SCOTT  | JONES  |
+| KING   | NULL   |
+| TURNER | BLAKE  |
+| ADAMS  | SCOTT  |
+| JAMES  | BLAKE  |
+| FORD   | JONES  |
+| MILLER | CLARK  |
++--------+--------+
+14 rows in set (0.00 sec)
+```

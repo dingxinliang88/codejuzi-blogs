@@ -29,5 +29,5 @@ if [ "$touch_files" = true ]; then
     touch -t "$date" "$file"
   done
 
-  # git push origin master
+  git push origin master
 fi
