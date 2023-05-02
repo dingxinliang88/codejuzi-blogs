@@ -22,6 +22,8 @@
     * [简单动态字符串SDS](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E7%AE%80%E5%8D%95%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2.md)
     * [链表](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E9%93%BE%E8%A1%A8.md)
     * [字典](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E5%AD%97%E5%85%B8.md)
+  * 《设计模式之禅》
+    * [6大设计模式](/books/%E3%80%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%A6%85%E3%80%8B/6%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.md)
 
 * Code Tips
   * [CodeTips](/docs/codetips/CodeTips.md)
