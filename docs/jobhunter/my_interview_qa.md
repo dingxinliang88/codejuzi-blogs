@@ -85,3 +85,65 @@ Java反射的缺点：
 
 - 如果`"abc"`这个字符串常量不存在，则会创建两个对象，分别是`"abc"`这个字符串常量以及`new String`这个实例对象
 - 如果`"abc"`这个字符串常量存在，只会创建一个实例对象，即`new String`
+
+## HashMap 和 HashTable的区别
+
+> HashTable 和 HashMap都是一个基于hash表实现的K-V结构的集合
+>
+> HashTable是JDK1.0引入的一个线程安全的集合类，因为所有数据访问的方法都加了一个Synchronized同步锁
+>
+> HashTable内部采用数组加链表来实现，链表用来解决hash冲突的问题
+>
+> HashMap是JDK1.2引入的一个线程不安全的集合类，HashMap内部也是采用了数组加链表实现，在JDK1.8版本里面做了优化，引入了红黑树，当链表长度大于等于8并且数组长度大于64的时候，就会把链表转化为红黑树，提升数据查找性能
+
+1. 从功能特性的角度来看
+   - HashTable是线程安全的
+   - HashMap不是线程安全的
+
+2. HashMap的性能要比HashTable更好，因为HashTable采用了全局同步锁来保证安全性，对性能影响较大
+
+3. 从内部实现的角度来看
+   - HashTable使用 数组 + 链表
+   - HashMap使用 数组 + 链表 + 红黑树
+
+4. HashMap的初始容量是16，HashTable的初始容量是11
+
+   ```java
+   /**
+    * Constructs a new, empty hashtable with a default initial capacity (11)
+    * and load factor (0.75).
+    */
+   public Hashtable() {
+     this(11, 0.75f);
+   }
+   ```
+
+   ```java
+   public class HashMap<K,V> extends AbstractMap<K,V>
+     implements Map<K,V>, Cloneable, Serializable {
+     // ...
+     /**
+      * The default initial capacity - MUST be a power of two.
+      */
+     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
+   
+     // ...
+   }
+   ```
+
+   
+
+5. HashMap可以使用null作为key，因为HashMap会把null转化为0进行存储，而HashTable不允许
+
+    `HashMap.java`
+   ```java
+   static final int hash(Object key) {
+     int h;
+     // 当key == null 的时候，hash值默认为0
+     return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+   }
+   ```
+
+6. HashTable和HashMap的key的散列算法不同
+   - HashTable使用key的hashcode对数组长度做取模
+   - HashMap对key的hashcode做了二次散列，从而避免key分布不均匀问题影响到查询性能

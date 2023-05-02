@@ -61,20 +61,15 @@ window.$docsify = {
     isExpected: true,
   },
   /* date */
-  // timeUpdater: {
-  //   text: "<div align='left' width='200px' style='color:gray;font-size:16px'>📅Posted @ {docsify-updated}</div>",
-  //   formatUpdated: "{YYYY}/{MM}/{DD}",
-  //   whereToPlace: "bottom", // "top" or "bottom", default to "bottom"
-  // },
-  formatUpdated: "{YYYY}/{MM}/{DD} {HH}:{mm}",
+  // formatUpdated: "{YYYY}/{MM}/{DD} {HH}:{mm}",
 
-  plugins: [
-    function (hook, vm) {
-      hook.beforeEach(function (html) {
-        return html + "\n\n\n\n----\n" + "📅 Post @ {docsify-updated}";
-      });
-    },
-  ],
+  // plugins: [
+  //   function (hook, vm) {
+  //     hook.beforeEach(function (html) {
+  //       return html + "\n\n\n\n----\n" + "📅 Post @ {docsify-updated}";
+  //     });
+  //   },
+  // ],
   /* process */
   progress: {
     position: "top",
