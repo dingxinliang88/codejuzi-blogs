@@ -1,10 +1,10 @@
 <!-- _sidebar.md -->
 * 写在最前面
   * [前言](README.md)
-  * [本站搭建](/create_blog/%E5%9F%BA%E4%BA%8Edocsify%E7%9A%84%E7%AE%80%E6%B4%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA.md)
+  * [本站搭建](/create_blog/doc.md)
 
 * 随笔
-  * [2023年再读《孔乙己》有感](/docs/eassys/2023%E5%B9%B4%E5%86%8D%E8%AF%BB%E3%80%8A%E5%AD%94%E4%B9%99%E5%B7%B1%E3%80%8B%E6%9C%89%E6%84%9F.md)
+  * [2023年再读《孔乙己》有感](/docs/eassys/%E3%80%8A%E5%AD%94%E4%B9%99%E5%B7%B1%E3%80%8B.md)
 
 * 开发规范
   * [Redis开发规范——键值设计](/docs/codeguides/Redis%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94%E9%94%AE%E5%80%BC%E8%AE%BE%E8%AE%A1.md)
@@ -17,10 +17,11 @@
   * [每日一题整理](/jobhunter/my_interview_qa.md)
 
 * 技术书籍阅读
-  * 《Redis设计与实现》（2014.4）
+  * 《Redis设计与实现》
     * [简单动态字符串SDS](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E7%AE%80%E5%8D%95%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2.md)
     * [链表](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E9%93%BE%E8%A1%A8.md)
     * [字典](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E5%AD%97%E5%85%B8.md)
+    * [整数集合](/books/%E3%80%8ARedis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/%E6%95%B4%E6%95%B0%E9%9B%86%E5%90%88.md)
   * 《设计模式之禅》
     * [6大设计模式](/books/%E3%80%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%A6%85%E3%80%8B/6%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.md)
 
@@ -48,9 +49,9 @@
   * [Windows安装Maven](/docs/envconfig/Windows%E5%AE%89%E8%A3%85Maven.md)
 
 * 数据结构
-  * [linked-list](/codes/datastructure/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA.md)
-  * [stack](/codes/datastructure/%E6%A0%88%26%26%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98.md)
-  * [queue](/codes/datastructure/%E9%98%9F%E5%88%97%26%26%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97.md)
+  * [linked-list](/codes/datastructure/linked_list.md)
+  * [stack](/codes/datastructure/stack.md)
+  * [queue](/codes/datastructure/queue.md)
 
 * Vuejs
   * [Vue2-Notes](/docs/frontend/vue/Vue2-Notes.md)
