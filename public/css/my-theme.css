@@ -1,36 +1,4 @@
 :root {
-  /* Root */
-  --navbar-root-background: transparent;
-  --navbar-root-background--active: var(--primary-color);
-  --navbar-root-background--hover: rgba(255, 255, 255, 0.1);
-  --navbar-root-border-radius: var(--border-radius-s);
-  --navbar-root-border-style: none;
-  --navbar-root-color: #fff;
-  --navbar-root-color--active: #fff;
-  --navbar-root-color--hover: #fff;
-  --navbar-root-margin: 0 0 0 1.5em;
-
-  /* Menus */
-  --navbar-menu-background: var(--base-background-color);
-  --navbar-menu-border-radius: var(--border-radius-m);
-  --navbar-menu-box-shadow: rgba(246, 235, 235, 0.15) 0px 4px 12px;
-  --navbar-menu-padding: 0.5em;
-
-  /* Menu Root */
-  --navbar-menu-root-background: transparent;
-  --navbar-menu-root-background--active: var(--primary-color);
-  --navbar-menu-root-background--hover: rgba(255, 255, 255, 0.1);
-  --navbar-menu-root-padding: 0.5em 1em;
-
-  /* Menu Links */
-  --navbar-menu-link-border-radius: var(--border-radius-s);
-  --navbar-menu-link-border-style: none;
-  --navbar-menu-link-color: #fff;
-  --navbar-menu-link-color--active: #fff;
-  --navbar-menu-link-color--hover: var(--primary-color);
-  --navbar-menu-link-margin: 0.75em 0.5em;
-  --navbar-menu-link-padding: 0.2em 0;
-
   /* Background */
   --cover-background-color: var(--base-background-color);
   --cover-background-mask-color: var(--base-background-color);
@@ -80,10 +48,9 @@
   --cover-button-primary-text-decoration-color: #fff;
   --cover-button-primary-text-decoration-color--hover: #fff;
 
-  --theme-hue: 500;
+  --theme-hue: 900;
 
   --content-max-width: 55em;
-
   /* Blockquote */
   --blockquote-background: var(--mono-tint3);
   --blockquote-border-color: var(--primary-color-light);
@@ -193,4 +160,15 @@
   --pagination-label-font-size: var(--font-size-s);
   --pagination-title-color: ;
   --pagination-title-font-size: var(--font-size-l);
+
+  /* search */
+  --search-input-border-color: #7f7979;
+  --search-input-background-color: #555151;
+  --search-result-item-color: #a9a2a2;
+  --search-result-item-font-size: 14px;
+  --search-result-item-padding: 0.5rem;
+  --search-clear-icon-color1: #ccc;
+  --search-clear-icon-color2: #999;
+  --search-input-color: #ccc8c8;
+  --search-input-font-size: 14px;
 }
