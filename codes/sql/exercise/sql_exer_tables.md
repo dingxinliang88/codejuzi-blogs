@@ -1,5 +1,9 @@
-# 建表语句
+# SQL练习题前置工作
 
+## 👉[点我返回](/codes/sql/exercise/sql_exercise.md)👈
+
+
+## 建表语句
 ```sql
 DROP TABLE IF EXISTS EMP;
 
@@ -30,6 +34,10 @@ CREATE TABLE
 
 CREATE TABLE SALGRADE ( GRADE INT, LOSAL INT, HISAL INT );
 
+```
+
+## 模拟数据
+```sql
 INSERT INTO
     DEPT (DEPTNO, DNAME, LOC)
 VALUES (10, 'ACCOUNTING', 'NEW YORK');
@@ -379,5 +387,4 @@ INSERT INTO
 VALUES (5, 3001, 9999);
 
 commit;
-
 ```

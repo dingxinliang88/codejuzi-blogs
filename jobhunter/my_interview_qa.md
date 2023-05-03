@@ -147,3 +147,48 @@ Java反射的缺点：
 6. HashTable和HashMap的key的散列算法不同
    - HashTable使用key的hashcode对数组长度做取模
    - HashMap对key的hashcode做了二次散列，从而避免key分布不均匀问题影响到查询性能
+
+
+## String、StringBuffer、StringBuilder的区别？
+
+1. 可变性
+
+   - `String`是不可变的
+
+   - `StringBuilder`与`StringBuffer`是可变的，因为它们都继承自`AbstractStringBuilder`类，在`AbstractStringBuilder`类中也是使用字符数组来保存字符串，只不过没有使用`final`和`private`关键字修饰，除此之外，`AbstractStringBuilder`类还提供了很多修改字符串的方法，比如`append`方法
+
+     ```java
+     abstract class AbstractStringBuilder implements Appendable, CharSequence {
+       // ...
+       byte[] value;
+     
+       public AbstractStringBuilder append(String str) {
+         if (str == null) {
+           return this.appendNull();
+         } else {
+           int len = str.length();
+           this.ensureCapacityInternal(this.count + len);
+           this.putStringAt(this.count, str);
+           this.count += len;
+           return this;
+         }
+       }
+       // ...
+     }
+     ```
+
+2. 线程安全性
+
+   - `String`中的对象是不可变的，也就可以理解为常量，是线程安全的
+   - `StringBuffer`对`AbstractStringBuilder`提供的方法加了锁或者对调用的方法加了同步锁，所以是线程安全的
+   - `StringBuilder`没有对方法加锁，所以是非线程安全的
+
+3. 性能
+
+   每次对`String`类型进行改变的时候，都会产生一个新的`String`对象，然后将指针指向新的`String`对象。`StringBuffer`每次都会对`StringBuffer`对象本身进行操作，而不是产生新的对象并改变对象的引用。相同情况下使用`StringBuilder`相比使用`StringBuffer`能获得10%\~15%左右的性能提升，但是多线程不安全的风险
+
+**『总结』**
+
+- 操作少量数据时，适用`String`
+- 单线程操作字符串缓冲区下操作大量数据，适用`StringBuilder`
+- 多线程操作字符串缓冲区下操作大量数据，适用`StringBuffer`

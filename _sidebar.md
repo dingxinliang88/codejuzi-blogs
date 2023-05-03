@@ -6,7 +6,6 @@
 * 随笔
   * [2023年再读《孔乙己》有感](/docs/eassys/2023%E5%B9%B4%E5%86%8D%E8%AF%BB%E3%80%8A%E5%AD%94%E4%B9%99%E5%B7%B1%E3%80%8B%E6%9C%89%E6%84%9F.md)
 
-
 * 开发规范
   * [Redis开发规范——键值设计](/docs/codeguides/Redis%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94%E9%94%AE%E5%80%BC%E8%AE%BE%E8%AE%A1.md)
   * [Redis开发规范——命令使用](/docs/codeguides/Redis%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8.md)
@@ -15,7 +14,7 @@
   * [看懂UML图](/docs/design_pattern/%E7%9C%8B%E6%87%82UML%E5%9B%BE.md)
 
 * 面试题（CodeJuzi）
-  * [每日一题整理](/docs/jobhunter/my_interview_qa.md)
+  * [每日一题整理](/jobhunter/my_interview_qa.md)
 
 * 技术书籍阅读
   * 《Redis设计与实现》（2014.4）
@@ -38,7 +37,6 @@
 
 * SQL
   * exercise
-    * [建表语句](/codes/sql/exercise/tables.md)
     * [SQL练习](/codes/sql/exercise/sql_exercise.md)
     * [附加题](/codes/sql/exercise/sql_extra_exer.md)
 

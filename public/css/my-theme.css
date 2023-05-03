@@ -1,0 +1,196 @@
+:root {
+  /* Root */
+  --navbar-root-background: transparent;
+  --navbar-root-background--active: var(--primary-color);
+  --navbar-root-background--hover: rgba(255, 255, 255, 0.1);
+  --navbar-root-border-radius: var(--border-radius-s);
+  --navbar-root-border-style: none;
+  --navbar-root-color: #fff;
+  --navbar-root-color--active: #fff;
+  --navbar-root-color--hover: #fff;
+  --navbar-root-margin: 0 0 0 1.5em;
+
+  /* Menus */
+  --navbar-menu-background: var(--base-background-color);
+  --navbar-menu-border-radius: var(--border-radius-m);
+  --navbar-menu-box-shadow: rgba(246, 235, 235, 0.15) 0px 4px 12px;
+  --navbar-menu-padding: 0.5em;
+
+  /* Menu Root */
+  --navbar-menu-root-background: transparent;
+  --navbar-menu-root-background--active: var(--primary-color);
+  --navbar-menu-root-background--hover: rgba(255, 255, 255, 0.1);
+  --navbar-menu-root-padding: 0.5em 1em;
+
+  /* Menu Links */
+  --navbar-menu-link-border-radius: var(--border-radius-s);
+  --navbar-menu-link-border-style: none;
+  --navbar-menu-link-color: #fff;
+  --navbar-menu-link-color--active: #fff;
+  --navbar-menu-link-color--hover: var(--primary-color);
+  --navbar-menu-link-margin: 0.75em 0.5em;
+  --navbar-menu-link-padding: 0.2em 0;
+
+  /* Background */
+  --cover-background-color: var(--base-background-color);
+  --cover-background-mask-color: var(--base-background-color);
+  --cover-background-mask-opacity: 0.8;
+
+  /* Blockquote (Subtitle) */
+  --cover-blockquote-font-size: var(--font-size-l);
+
+  /* Border */
+  --cover-border-color: var(--primary-color);
+
+  /* Heading */
+  --cover-heading-color: var(--primary-color);
+  --cover-heading-font-size: var(--font-size-xxl);
+
+  /* Links */
+  --cover-link-text-decoration: underline;
+
+  /* Buttons */
+  --cover-button-background: transparent;
+  --cover-button-background--hover: var(--theme-color-light);
+  --cover-button-border: 2px solid var(--theme-color);
+  --cover-button-border--hover: none;
+  --cover-button-border-radius: var(--border-radius-l);
+  --cover-button-box-shadow: none;
+  --cover-button-box-shadow--hover: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --cover-button-color: var(--text-color);
+  --cover-button-color--hover: var(--theme-color);
+  --cover-button-padding: 1em 2.5rem;
+  --cover-button-text-decoration: none;
+  --cover-button-text-decoration--hover: none;
+  --cover-button-text-decoration-color: var(--text-color);
+  --cover-button-text-decoration-color--hover: var(--theme-color);
+  --cover-button-transition: all var(--duration-medium) ease-in-out;
+
+  /* Buttons - Primary */
+  --cover-button-primary-background: var(--theme-color);
+  --cover-button-primary-background--hover: var(--theme-color-dark);
+  --cover-button-primary-border: 2px solid var(--theme-color);
+  --cover-button-primary-border--hover: none;
+  --cover-button-primary-box-shadow: none;
+  --cover-button-primary-box-shadow--hover: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --cover-button-primary-color: #fff;
+  --cover-button-primary-color--hover: #fff;
+  --cover-button-primary-text-decoration: none;
+  --cover-button-primary-text-decoration--hover: none;
+  --cover-button-primary-text-decoration-color: #fff;
+  --cover-button-primary-text-decoration-color--hover: #fff;
+
+  --theme-hue: 500;
+
+  --content-max-width: 55em;
+
+  /* Blockquote */
+  --blockquote-background: var(--mono-tint3);
+  --blockquote-border-color: var(--primary-color-light);
+  --blockquote-border-style: solid;
+  --blockquote-border-width: 2px;
+  --blockquote-border-radius: var(--border-radius-m);
+  --blockquote-color: var(--mono-shade6);
+  --blockquote-em-font-family: inherit;
+  --blockquote-em-font-size: inherit;
+  --blockquote-em-font-style: italic;
+  --blockquote-em-font-weight: normal;
+  --blockquote-font-family: inherit;
+  --blockquote-font-size: inherit;
+  --blockquote-font-style: normal;
+  --blockquote-font-weight: normal;
+  --blockquote-quotes-close: "”";
+  --blockquote-quotes-color: var(--mono-tint5);
+  --blockquote-quotes-font-family: Georgia, serif;
+  --blockquote-quotes-font-size: 4rem;
+  --blockquote-quotes-open: "“";
+  --blockquote-padding: 1.5rem;
+
+  /* Code */
+  --code-font-family: Monaco;
+  --code-font-size: calc(var(--font-size-m) * 0.95);
+  --code-font-weight: normal;
+  --code-tab-size: 4;
+
+  /* Code Block */
+  --code-block-border-radius: var(--border-radius-m);
+  --code-block-line-height: var(--base-line-height);
+  --code-block-margin: 1rem 0;
+  --code-block-padding: 1.5rem;
+
+  /* Code Inline */
+  --code-inline-background: var(--mono-tint3);
+  --code-inline-border-radius: var(--border-radius-s);
+  --code-inline-color: var(--mono-shade6);
+  --code-inline-margin: 0 0.1rem;
+  --code-inline-padding: 0.1rem 0.3rem;
+
+  /* Keyboard */
+  --kbd-background: var(--mono-tint3);
+  --kbd-border: 1px solid var(--mono-shade4);
+  --kbd-border-radius: var(--border-radius-m);
+  --kbd-color: var(--mono-shade6);
+  --kbd-font-size: var(--font-size-s);
+  --kbd-margin: 0 0.3em;
+  --kbd-min-width: 2.5em;
+  --kbd-padding: 0.65em 0.5em;
+
+  /* Links */
+  --link-border-bottom: none;
+  --link-border-bottom--hover: none;
+  --link-color: var(--link-color-default);
+  --link-color--hover: var(--link-color-hover);
+  --link-text-decoration: none;
+  --link-text-decoration--hover: underline;
+  --link-text-decoration-color: var(--link-color-default);
+  --link-text-decoration-color--hover: var(--link-color-hover);
+
+  /* Notice */
+  --notice-background: var(--mono-tint3);
+  --notice-border-color: var(--primary-color-light);
+  --notice-border-radius: var(--border-radius-m);
+  --notice-border-style: solid;
+  --notice-border-width: 2px;
+  --notice-color: var(--mono-shade6);
+  --notice-font-family: inherit;
+  --notice-font-weight: normal;
+  --notice-padding: 1em 1.5em;
+
+  /* Tables */
+  --table-body-border-color: var(--primary-color-light);
+  --table-body-border-width: 2px;
+  --table-cell-border-color: var(--mono-shade4);
+  --table-cell-border-width: 1px;
+  --table-cell-padding: 0.75em 0.5em;
+  --table-head-background: var(--primary-color-light);
+  --table-head-border-color: var(--primary-color-light);
+  --table-head-border-top-style: solid;
+  --table-head-border-top-width: 2px;
+  --table-head-border-width: 2px;
+  --table-head-font-weight: var(--strong-font-weight);
+  --table-row-even-background: var(--mono-tint3);
+  --table-row-odd-background: var(--mono-tint3);
+
+  /* copy code */
+  --copycode-background: #808080;
+  --copycode-color: #fff;
+
+  /* Tab blocks */
+  --docsifytabs-border-color: var(--mono-tint2);
+  --docsifytabs-border-radius-px: var(--border-radius-s);
+
+  /* Tabs */
+  --docsifytabs-tab-background: var(--mono-tint3);
+  --docsifytabs-tab-color: var(--mono-tint1);
+
+  /* pageination */
+  --pagination-border-top: 1px solid var(--mono-tint2);
+  --pagination-chevron-height: 0.8em;
+  --pagination-chevron-stroke: currentColor;
+  --pagination-chevron-stroke-linecap: round;
+  --pagination-chevron-stroke-width: 1px;
+  --pagination-label-color: ;
+  --pagination-label-font-size: var(--font-size-s);
+  --pagination-title-color: ;
+  --pagination-title-font-size: var(--font-size-l);
+}

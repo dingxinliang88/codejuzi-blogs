@@ -1,6 +1,6 @@
 # SQL 练习题
 
-> 请在练习前执行对应的[建表语句](./codes/sql/exercise/tables)
+> <strong style="color:red">请在练习前执行对应的👉[建表语句](/codes/sql/exercise/sql_exer_tables.md)👈</strong>
 
 ## 1、取得每个部门最高薪水的人员名称
 
@@ -745,4 +745,151 @@ mysql> select a.ename '员工', b.ename '领导'
 | MILLER | CLARK  |
 +--------+--------+
 14 rows in set (0.00 sec)
+```
+
+## 14、列出受雇日期早于其直接上级的所有员工的编号、姓名、部门名称
+
+emp表自连接查询，emp a => 员工表， emp b => 领导表
+
+条件：`a.mgr = b.empno and a.hiredate < b.hiredate`
+
+emp表和dept表联合查询，条件：`emp.deptno = dept.deptno`
+
+```sql
+select
+    a.ename '员工',
+    a.hiredate,
+    b.ename '领导',
+    b.hiredate,
+    d.dname
+from emp a
+    join emp b on a.mgr = b.empno and a.hiredate < b.hiredate
+    join dept d on a.deptno = d.deptno;
+```
+
+```sh
+mysql> select a.ename '员工', a.hiredate, b.ename '领导', b.hiredate, d.dname
+    -> from emp a 
+    -> join emp b
+    -> on a.mgr = b.empno and a.hiredate < b.hiredate
+    -> join dept d
+    -> on a.deptno = d.deptno;
++--------+------------+--------+------------+------------+
+| 员工   | hiredate   | 领导   | hiredate   | dname      |
++--------+------------+--------+------------+------------+
+| SMITH  | 1980-12-17 | FORD   | 1981-12-03 | RESEARCH   |
+| ALLEN  | 1981-02-20 | BLAKE  | 1981-05-01 | SALES      |
+| WARD   | 1981-02-22 | BLAKE  | 1981-05-01 | SALES      |
+| JONES  | 1981-04-02 | KING   | 1981-11-17 | RESEARCH   |
+| BLAKE  | 1981-05-01 | KING   | 1981-11-17 | SALES      |
+| CLARK  | 1981-06-09 | KING   | 1981-11-17 | ACCOUNTING |
++--------+------------+--------+------------+------------+
+6 rows in set (0.00 sec)
+```
+
+## 15、列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门
+
+部门表dept要全部查询到
+
+```sql
+select e.*, d.dname
+from emp e
+    right join dept d on e.deptno = d.deptno;
+```
+
+```sh
+mysql> select e.*, d.dname
+    -> from emp e
+    -> right join dept d
+    -> on e.deptno = d.deptno;
++-------+--------+-----------+------+------------+---------+---------+--------+------------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO | dname      |
++-------+--------+-----------+------+------------+---------+---------+--------+------------+
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 | ACCOUNTING |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 | ACCOUNTING |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 | ACCOUNTING |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 | RESEARCH   |
+|  7876 | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100.00 |    NULL |     20 | RESEARCH   |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1987-04-19 | 3000.00 |    NULL |     20 | RESEARCH   |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 | RESEARCH   |
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 | RESEARCH   |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 | SALES      |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 | SALES      |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 | SALES      |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | SALES      |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 | SALES      |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 | SALES      |
+|  NULL | NULL   | NULL      | NULL | NULL       |    NULL |    NULL |   NULL | OPERATIONS |
++-------+--------+-----------+------+------------+---------+---------+--------+------------+
+15 rows in set (0.00 sec)
+```
+
+
+## 16、列出至少有 5 个员工的所有部门
+
+按照部门编号分组、计数，筛选
+
+```sql
+select
+    d.deptno,
+    d.dname,
+    count(*) as 'num'
+from emp e
+    join dept d on e.deptno = d.deptno
+group by deptno
+having num >= 5;
+```
+
+```sh
+mysql> select d.deptno, d.dname, count(*) as 'num'
+    -> from emp e 
+    -> join dept d
+    -> on e.deptno = d.deptno 
+    -> group by deptno 
+    -> having num >= 5;
++--------+----------+-----+
+| deptno | dname    | num |
++--------+----------+-----+
+|     20 | RESEARCH |   5 |
+|     30 | SALES    |   6 |
++--------+----------+-----+
+2 rows in set (0.00 sec)
+```
+
+## 17、列出薪金比"SMITH" 多的所有员工信息
+
+子查询，先查出SMITH的薪金
+
+```sql
+select empno, ename, sal
+from emp
+where sal > (
+        select sal
+        from emp
+        where ename = 'SMITH'
+    );
+```
+
+```sh
+mysql> select empno, ename, sal
+    -> from emp 
+    -> where sal > (select sal from emp where ename = 'SMITH');
++-------+--------+---------+
+| empno | ename  | sal     |
++-------+--------+---------+
+|  7499 | ALLEN  | 1600.00 |
+|  7521 | WARD   | 1250.00 |
+|  7566 | JONES  | 2975.00 |
+|  7654 | MARTIN | 1250.00 |
+|  7698 | BLAKE  | 2850.00 |
+|  7782 | CLARK  | 2450.00 |
+|  7788 | SCOTT  | 3000.00 |
+|  7839 | KING   | 5000.00 |
+|  7844 | TURNER | 1500.00 |
+|  7876 | ADAMS  | 1100.00 |
+|  7900 | JAMES  |  950.00 |
+|  7902 | FORD   | 3000.00 |
+|  7934 | MILLER | 1300.00 |
++-------+--------+---------+
+13 rows in set (0.00 sec)
 ```

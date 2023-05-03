@@ -3,7 +3,7 @@
 > 先点到这里的，建议先去看看[SQL练习](/codes/sql/exercise/sql_exercise.md)哦
 
 
-相应的建表语句和模拟数据👉[点这里哦](/codes/sql/exercise/exer_table.md)👈
+相应的建表语句和模拟数据👉[点这里哦](/codes/sql/exercise/sql_exer_extra_table.md)👈
 
 有 3 个表 S(学生表)，C（课程表），SC（学生选课表）
 S（SNO，SNAME）代表（学号，姓名）

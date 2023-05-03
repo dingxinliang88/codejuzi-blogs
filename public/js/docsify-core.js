@@ -27,6 +27,18 @@ window.$docsify = {
   themeable: {
     readyTransition: true, // default
   },
+  themeable: {
+    readyTransition: true, // default
+    responsiveTables: true, // default
+  },
+  /* tabs */
+  tabs: {
+    persist    : true,      // default
+    sync       : true,      // default
+    theme      : 'classic', // default
+    tabComments: true,      // default
+    tabHeadings: true       // default
+  },
   /*搜索相关设置*/
   search: {
     maxAge: 86400000, // 过期时间，单位毫秒，默认一天
@@ -62,7 +74,6 @@ window.$docsify = {
   },
   /* date */
   // formatUpdated: "{YYYY}/{MM}/{DD} {HH}:{mm}",
-
   // plugins: [
   //   function (hook, vm) {
   //     hook.beforeEach(function (html) {
