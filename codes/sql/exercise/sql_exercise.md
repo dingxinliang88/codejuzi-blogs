@@ -893,3 +893,251 @@ mysql> select empno, ename, sal
 +-------+--------+---------+
 13 rows in set (0.00 sec)
 ```
+
+## 18、列出所有"CLERK"(办事员) 的姓名及其部门名称, 部门的人数
+
+Step1: 找出所有办事员的姓名及其部门名称
+
+```sql
+select
+    e.ename,
+    e.job,
+    d.deptno,
+    d.dname
+from emp e
+    join dept d on e.deptno = d.deptno
+where e.job = 'CLERK';
+```
+
+```sh
+mysql> select e.ename, e.job, d.deptno, d.dname
+    -> from emp e
+    -> join dept d
+    -> on e.deptno = d.deptno
+    -> where e.job = 'CLERK';
++--------+-------+--------+------------+
+| ename  | job   | deptno | dname      |
++--------+-------+--------+------------+
+| SMITH  | CLERK |     20 | RESEARCH   |
+| ADAMS  | CLERK |     20 | RESEARCH   |
+| JAMES  | CLERK |     30 | SALES      |
+| MILLER | CLERK |     10 | ACCOUNTING |
++--------+-------+--------+------------+
+4 rows in set (0.00 sec)
+```
+
+Step2: 查询部门人数
+```sql
+select t1.*, t2.deptcount
+from (
+        select
+            e.ename,
+            e.job,
+            d.deptno,
+            d.dname
+        from emp e
+            join dept d on e.deptno = d.deptno
+        where e.job = 'CLERK'
+    ) t1
+    join (
+        select
+            deptno,
+            count(1) as deptcount
+        from emp
+        group by
+            deptno
+    ) t2 on t1.deptno = t2.deptno;
+```
+
+```sh
+mysql> select t1.*, t2.deptcount
+    -> from (select e.ename, e.job, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where e.job = 'CLERK') t1
+    -> join (select deptno, count(1) as deptcount from emp group by deptno) t2
+    -> on t1.deptno = t2.deptno;
++--------+-------+--------+------------+-----------+
+| ename  | job   | deptno | dname      | deptcount |
++--------+-------+--------+------------+-----------+
+| SMITH  | CLERK |     20 | RESEARCH   |         5 |
+| ADAMS  | CLERK |     20 | RESEARCH   |         5 |
+| JAMES  | CLERK |     30 | SALES      |         6 |
+| MILLER | CLERK |     10 | ACCOUNTING |         3 |
++--------+-------+--------+------------+-----------+
+4 rows in set (0.00 sec)
+```
+
+## 19、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数
+
+按照工作岗位分组求最小值
+
+```sql
+
+```
+
+```sh
+mysql> select job, count(1) from emp group by job having min(sal) > 1500;
++-----------+----------+
+| job       | count(1) |
++-----------+----------+
+| MANAGER   |        3 |
+| ANALYST   |        2 |
+| PRESIDENT |        1 |
++-----------+----------+
+3 rows in set (0.00 sec)
+```
+
+## 20、列出在部门"SALES"<销售部> 工作的员工的姓名, 假定不知道销售部的部门编号
+
+```sql
+select ename
+from emp
+where deptno = (
+        select deptno
+        from dept
+        where dname = 'SALES'
+    );
+```
+
+```sh
+mysql> select ename 
+    -> from emp 
+    -> where deptno = (select deptno from dept where dname = 'SALES');
++--------+
+| ename  |
++--------+
+| ALLEN  |
+| WARD   |
+| MARTIN |
+| BLAKE  |
+| TURNER |
+| JAMES  |
++--------+
+6 rows in set (0.00 sec)
+```
+
+## 21、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级
+
+```sql
+select
+    e.ename '员工',
+    d.dname,
+    l.ename '领导',
+    s.grade
+from emp e
+    join dept d on e.deptno = d.deptno
+    left join emp l on e.mgr = l.empno
+    join salgrade s on e.sal between s.losal and s.hisal
+where e.sal > (
+        select avg(sal)
+        from emp
+    );
+```
+
+```sh
+mysql> select e.ename '员工',d.dname,l.ename '领导',s.grade
+    -> from emp e
+    -> join dept d
+    -> on e.deptno = d.deptno
+    -> left join emp l
+    -> on e.mgr = l.empno 
+    -> join salgrade s
+    -> on e.sal between s.losal and s.hisal
+    -> where e.sal > (select avg(sal) from emp);
++--------+------------+--------+-------+
+| 员工   | dname      | 领导   | grade |
++--------+------------+--------+-------+
+| FORD   | RESEARCH   | JONES  |     4 |
+| SCOTT  | RESEARCH   | JONES  |     4 |
+| CLARK  | ACCOUNTING | KING   |     4 |
+| BLAKE  | SALES      | KING   |     4 |
+| JONES  | RESEARCH   | KING   |     4 |
+| KING   | ACCOUNTING | NULL   |     5 |
++--------+------------+--------+-------+
+6 rows in set (0.01 sec)
+```
+
+## 22、列出与"SCOTT"从事相同工作的所有员工及部门名称
+
+```sql
+select
+    e.ename,
+    e.job,
+    d.dname
+from emp e
+    join dept d on e.deptno = d.deptno
+where e.job = (
+        select job
+        from emp
+        where
+            ename = 'SCOTT'
+    )
+    and e.ename <> 'SCOTT';
+```
+
+```sh
+mysql> select e.ename, e.job, d.dname
+    -> from emp e
+    -> join dept d
+    -> on e.deptno = d.deptno 
+    -> where e.job = (select job from emp where ename = 'SCOTT')
+    -> and e.ename <> 'SCOTT';
++-------+---------+----------+
+| ename | job     | dname    |
++-------+---------+----------+
+| FORD  | ANALYST | RESEARCH |
++-------+---------+----------+
+1 row in set (0.00 sec)
+```
+
+
+## 23、列出薪金等于部门编号为30中员工的薪金的其他员工的姓名和薪金
+
+```sql
+select ename, sal
+from emp
+where sal in (
+        select distinct(sal)
+        from emp
+        where deptno = 30
+    ) and deptno <> 30;
+```
+
+```sh
+mysql> select ename, sal 
+    -> from emp 
+    -> where sal in (select distinct(sal) from emp where deptno = 30)
+    -> and deptno <> 30;
+Empty set (0.00 sec)
+```
+
+## 24、列出薪金高于在部门编号为30的工作的所有员工的薪金的员工姓名和薪金，部门名称
+
+```sql
+select
+    e.ename,
+    e.sal,
+    d.dname
+from emp e
+    join dept d on e.deptno = d.deptno
+where e.sal > (
+        select max(sal)
+        from emp
+        where deptno = 30
+    );
+```
+
+```sh
+mysql> select e.ename,e.sal,d.dname
+    -> from emp e
+    -> join dept d
+    -> on e.deptno = d.deptno
+    -> where e.sal > (select max(sal) from emp where deptno = 30);
++-------+---------+------------+
+| ename | sal     | dname      |
++-------+---------+------------+
+| JONES | 2975.00 | RESEARCH   |
+| SCOTT | 3000.00 | RESEARCH   |
+| KING  | 5000.00 | ACCOUNTING |
+| FORD  | 3000.00 | RESEARCH   |
++-------+---------+------------+
+4 rows in set (0.01 sec)
+```

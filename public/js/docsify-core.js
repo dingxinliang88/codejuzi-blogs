@@ -24,20 +24,20 @@ window.$docsify = {
   // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级（建议配置为2-4）
   subMaxLevel: 4,
   themeable: {
-    readyTransition: true, 
+    readyTransition: true,
   },
   themeable: {
-    readyTransition: true, 
-    responsiveTables: true, 
+    readyTransition: true,
+    responsiveTables: true,
   },
   topMargin: 90,
   /* tabs */
   tabs: {
-    persist: true, 
-    sync: true, 
-    theme: "classic", 
-    tabComments: true, 
-    tabHeadings: true, 
+    persist: true,
+    sync: true,
+    theme: "classic",
+    tabComments: true,
+    tabHeadings: true,
   },
   /*搜索相关设置*/
   search: {

@@ -1,7 +1,6 @@
 # Java基础
 
-
-## Java反射的优缺点？
+# Java反射的优缺点？
 
 > 反射是Java语言重要的一个特征。它能够在程序运行的过程中去构造任意一个类对象，并且可以获得任意一个类的成员变量、成员方法、属性，以及调用任意一个对象的方法。
 >
@@ -19,7 +18,7 @@ Java反射的缺点：
 - 使用反射之后，代码的可读性会降低
 - 反射可以绕过一些限制访问的属性和方法(private, protected)，可能会导致破坏了代码本身的封装性和抽象性
 
-## Integer a1 = 100; Integer a2 = 100; a1 == a2 的运行结果？
+# Integer a1 = 100; Integer a2 = 100; a1 == a2 的运行结果？
 
 > 考查知识点：`==`表示内存地址匹配、装箱拆箱、Integer内部设计原理
 >
@@ -77,7 +76,7 @@ Java反射的缺点：
 
 `a1==a2`的执行结果为`true`，因为`Integer`内部用到了享元模式，针对-128 \~ 127之间的数字做了缓存，使用`Integer a1 = 100`这个方式赋值时，Java默认会通过`valueOf()`对100这个数字进行装箱操作，从而触发缓存机制，使得a1和a2指向了同一个Integer地址空间。
 
-## new String("abc")创建了几个对象？
+# new String("abc")创建了几个对象？
 
 代码中有一个`new`关键字，这个关键字是在程序运行时，根据已经加载的系统类`String`，在堆内存内实例化一个字符串对象。然后，在`String`的构造方法内部传入一个`"abc"`字符串，因为`String`内的字符串成员变量是`final`修饰的，所以它是一个字符串常量。接下来，JVM会拿字面量`"abc"`去字符串常量池内试图去获取它对应的`String`对象引用，如果不能获取到，就会在堆内存里面创建一个`"abc"`的`String`对象，并且把引用保存到字符串常量池内。后续操作中如果再有对字面量`"abc"`的定义，由于字符串常量池内部已经存在字面量`"abc"`的引用了，所以只需要从常量池获取对应的引用就可以了，不需要再创建。
 
@@ -86,7 +85,7 @@ Java反射的缺点：
 - 如果`"abc"`这个字符串常量不存在，则会创建两个对象，分别是`"abc"`这个字符串常量以及`new String`这个实例对象
 - 如果`"abc"`这个字符串常量存在，只会创建一个实例对象，即`new String`
 
-## HashMap 和 HashTable的区别
+# HashMap 和 HashTable的区别
 
 > HashTable 和 HashMap都是一个基于hash表实现的K-V结构的集合
 >
@@ -149,7 +148,7 @@ Java反射的缺点：
    - HashMap对key的hashcode做了二次散列，从而避免key分布不均匀问题影响到查询性能
 
 
-## String、StringBuffer、StringBuilder的区别？
+# String、StringBuffer、StringBuilder的区别？
 
 1. 可变性
 
@@ -192,3 +191,53 @@ Java反射的缺点：
 - 操作少量数据时，适用`String`
 - 单线程操作字符串缓冲区下操作大量数据，适用`StringBuilder`
 - 多线程操作字符串缓冲区下操作大量数据，适用`StringBuffer`
+
+
+
+# Lock和Synchronized的区别
+
+1）功能角度：Lock和Synchronized都是Java用来解决线程安全问题的工具
+
+2）特性角度
+
+- Synchronized是Java中的同步关键字，Lock是JUC包中提供的接口
+
+- Synchronized可以通过两种方式来控制锁的粒度
+
+	```java
+	// 修饰在方法层面
+	public synchronized void sync() {
+	  
+	}
+	
+	Object lock = new Object();
+	// 修饰在代码块
+	public void sync() {
+	  synchronized(lock) {
+	  }
+	}
+	```
+
+	一种是把Synchronized关键字修饰在方法层面；另一种是修饰在代码块上，并且我们可以通过Synchronized加锁对象的生命周期来控制锁的作用范围，比如锁对象是静态对象或者类对象，那么这个锁就是全局锁，如果锁对象是普通实例对象，那么这个锁的范围就取决于这个实例的生命周期。
+
+- Lock锁的粒度是通过它里面提供的`lock()`和`unlock()`方法决定的，包裹在这两个方法之间的代码能够保证线程安全性，而锁的作用域取决于Lock实例的声明周期。
+
+	```java
+	Lock lock = new ReentrantLock();
+	
+	public void sync() {
+	  // 竞争锁
+	  lock.lock();
+	  // todo dosomething...
+	  // 释放锁
+	  lock.unlock();
+	}
+	```
+
+	Lock比Synchronized的灵活性更高，Lock可以自主决定什么时候加锁，什么时候释放锁，只需要调用`lock()`和`unlock()`这两个方法即可，同时Lock还提供了非阻塞的竞争锁方法`trylock()`方法，这个方法通过返回一个布尔值来告诉当前线程是否有其他线程正在使用锁。
+
+	Synchronized由于是关键字，所以它无法实现非阻塞竞争锁的方法，此外，Synchronized锁的释放是被动的，只有当Synchronized同步代码块执行完以后或者代码出现异常才会释放。
+
+- Lock提供了公平锁和非公平锁的机制，公平锁是指线程竞争锁资源的时候，如果已经有其他线程正在排队等待锁释放，那么当前竞争锁资源的线程无法插队。非公平锁就是不管是否有线程在排队等待锁，他都会尝试去竞争一次锁。Synchronized只提供了一种非公平锁的实现
+
+3）性能方面：Synchronized和Lock在性能层面差别不大，在实现上会有一些区别，Synchronized引入偏向锁、轻量级锁、重量级锁和锁升级的方式来优化锁的性能，而Lock中则使用到了自旋锁的方式来实现性能优化。

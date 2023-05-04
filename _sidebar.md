@@ -14,7 +14,7 @@
   * [看懂UML图](/docs/design_pattern/%E7%9C%8B%E6%87%82UML%E5%9B%BE.md)
 
 * 面试题（CodeJuzi）
-  * [每日一题整理](/jobhunter/my_interview_qa.md)
+  * [Java基础](/jobhunter/java-base.md)
 
 * 技术书籍阅读
   * 《Redis设计与实现》
