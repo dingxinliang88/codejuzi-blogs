@@ -36,7 +36,7 @@ CREATE TABLE
 
 ## 模拟数据
 ```sql
-NSERT INTO S VALUES ('S001', '张三');
+INSERT INTO S VALUES ('S001', '张三');
 
 INSERT INTO S VALUES ('S002', '李四');
 
