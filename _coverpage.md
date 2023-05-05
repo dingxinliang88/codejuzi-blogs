@@ -1,7 +1,7 @@
 <!-- _coverpage.md -->
 
-# CodeJuziの技术文档
-> 这是一份计算机技术学习资料
+# CodeJuziの水货文档
+> 这是一份计算机(doge)技术学习资料
 
 - Copyright © 2023 CodeJuzi All Rights Reserved.
 

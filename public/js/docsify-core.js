@@ -1,6 +1,6 @@
 window.$docsify = {
   // 项目名称
-  name: "<span>CodeJuziの技术文档</span>",
+  name: "<span>CodeJuziの水货文档</span>",
   // 仓库地址，点击右上角的Github章鱼猫头像会跳转到此地址
   repo: "https://github.com/dingxinliang88",
   // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
@@ -49,7 +49,7 @@ window.$docsify = {
     noData: "找不到结果",
     depth: 2,
     hideOtherSidebarContent: true,
-    namespace: "CodeJuziの技术文档",
+    namespace: "CodeJuziの水货文档",
   },
   /* 分页相关 */
   pagination: {
