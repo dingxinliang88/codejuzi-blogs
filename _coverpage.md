@@ -1,5 +1,7 @@
 <!-- _coverpage.md -->
 
+![logo](_media/logo.svg)
+
 # CodeJuziの水货文档
 > 这是一份计算机(doge)技术学习资料
 
