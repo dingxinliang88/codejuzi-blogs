@@ -11,7 +11,9 @@ next:指针域
 
 ## 一、带头节点
 
-**structure.h**
+> [GitHub链接](https://github.com/dingxinliang88/hhu-iot-code-sophomore/tree/master/data_structure/single_llist_with_head)
+
+**linkedlist.h**
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,7 +39,6 @@ next:指针域
 typedef struct LNode
 {
     int data;
-
     struct LNode *next;
 } LNode;
 
@@ -49,14 +50,12 @@ typedef struct LNode
 typedef struct LList
 {
     LNode *head;
-
     int length;
 } LList;
 
 #pragma endregion
 
 /// @brief 创建节点
-/// @param data
 /// @return 指向新节点的指针
 LNode *createLNode(int data);
 
@@ -65,44 +64,35 @@ LNode *createLNode(int data);
 LList *createLList();
 
 /// @brief 插入节点（头插法）
-/// @param l 链表
-/// @param data 待插入的数据
 /// @return OK => 插入成功， ERROR => 插入失败
 Status insertLNode(LList *l, int data);
 
 /// @brief 在链表的index位置插入节点
-/// @param l 链表
-/// @param index index索引位置
-/// @param data 待插入数据
 /// @return OK => 插入成功， ERROR => 插入失败
 Status insertLNodeByIndex(LList *l, int index, int data);
 
 /// @brief 输出链表
-/// @param l 链表
 void outputLList(LList *l);
 
 /// @brief 释放链表
-/// @param l 链表
 void clearLList(LList *l);
 
 /// @brief 根据val查询，并输出
-/// @param l 链表
-/// @param val 待查找的数据
 /// @return OK => 查找到， ERROR => 链表为空 || 查询无果
 Status searchElement(LList *l, int val);
 
 ```
 
-**structure.c**
+**linkedlist.c**
 
 ```c
 /***********************************************************
- * File Name: structure.c
+ * File Name: linkedlist.c
  * Author: codejuzi
  * Date Created: 2023-04-12
- * Description: 方法实现文件 => "structure.c"
+ * Description: 方法实现文件 => "linkedlist.c"
  ************************************************************/
-#include "structure.h"
+#include "linkedlist.h"
 
 LNode *createLNode(int data)
 {
@@ -211,8 +201,7 @@ Status searchElement(LList *l, int val)
 * Date Created: 2023-04-12
 * Description: 测试类（带头节点）
 ************************************************************/
-
-#include "structure.h"
+#include "linkedlist.h"
 
 int main(int argc, char const *argv[])
 {
@@ -236,7 +225,9 @@ int main(int argc, char const *argv[])
 
 ## 二、不带头节点
 
-**structure.h**
+> [GitHub链接](https://github.com/dingxinliang88/hhu-iot-code-sophomore/tree/master/data_structure/single_llist_withnot_head)
+
+**linkedlist.h**
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -262,7 +253,6 @@ int main(int argc, char const *argv[])
 typedef struct LNode
 {
     int data;
-
     struct LNode *next;
 } LNode;
 
@@ -274,7 +264,6 @@ typedef struct LNode
 typedef struct LList
 {
     LNode *head;
-
     int length;
 } LList;
 
@@ -290,47 +279,36 @@ LNode *createLNode(int data);
 LList *createLList();
 
 /// @brief 插入节点（头插法）
-/// @param l 链表
-/// @param data 待插入的数据
 /// @return OK => 插入成功， ERROR => 插入失败
 Status insertLNode(LList *l, int data);
 
 /// @brief 在链表的index位置插入节点
-/// @param l 链表
-/// @param index index索引位置
-/// @param data 待插入数据
 /// @return OK => 插入成功， ERROR => 插入失败
 Status insertLNodeByIndex(LList *l, int index, int data);
 
 /// @brief 输出链表
-/// @param l 链表
 void outputLList(LList *l);
 
 /// @brief 释放链表
-/// @param l 链表
 void clearLList(LList *l);
 
 /// @brief 根据val查询，并输出
-/// @param l 链表
-/// @param val 待查找的数据
 /// @return OK => 查找到， ERROR => 链表为空 || 查询无果
 Status searchElement(LList *l, int val);
 
 ```
 
-**structure.c**
+**linkedlist.c**
 ```c
 /***********************************************************
-* File Name: structure.c
+* File Name: linkedlist.c
 * Author: codejuzi
 * Date Created: 2023-04-12
-* Description: 方法实现文件 => "structure.c"
+* Description: 方法实现文件 => "linkedlist.c"
 ************************************************************/
-#include "structure.h"
+#include "linkedlist.h"
 
-/// @brief
-/// @param data
-/// @return
+
 LNode *createLNode(int data)
 {
     LNode *node = (LNode *)malloc(sizeof(LNode));
@@ -437,7 +415,7 @@ Status searchElement(LList *l, int val)
  * Date Created: 2023-04-12
  * Description: 测试类（不带头节点）
  ************************************************************/
-#include "structure.h"
+#include "linkedlist.h"
 
 int main(int argc, char const *argv[])
 {

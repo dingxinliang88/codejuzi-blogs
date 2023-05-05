@@ -7,12 +7,12 @@ window.$docsify = {
   loadSidebar: true,
   // autoHeader: true,
   alias: {
-    "../.*/_sidebar.md": "../_sidebar.md",
+    "/.*/_sidebar.md": "/_sidebar.md",
   },
   subMaxLevel: 3,
-  sidebarDisplayLevel: 1, // set sidebar display level
+  sidebarDisplayLevel: 2, // set sidebar display level
   auto2top: true,
-  notFoundPage: "../_404.md",
+  notFoundPage: "/_404.md",
   // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
   loadNavbar: true,
   // 小屏设备下合并导航栏到侧边栏
@@ -23,9 +23,6 @@ window.$docsify = {
   maxLevel: 5,
   // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级（建议配置为2-4）
   subMaxLevel: 4,
-  themeable: {
-    readyTransition: true,
-  },
   themeable: {
     readyTransition: true,
     responsiveTables: true,
@@ -56,8 +53,8 @@ window.$docsify = {
   },
   /* 分页相关 */
   pagination: {
-    previousText: "上一章节",
-    nextText: "下一章节",
+    previousText: "Prev",
+    nextText: "Next",
     crossChapter: true,
     crossChapterText: true,
   },

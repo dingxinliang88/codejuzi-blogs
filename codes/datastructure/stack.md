@@ -6,6 +6,8 @@
 
 ## 一、单栈
 
+[GitHub链接](https://github.com/dingxinliang88/hhu-iot-code-sophomore/tree/master/data_structure/common_stack)
+
 **stack.h**
 ```c
 #ifndef _STACK_H_
@@ -208,6 +210,8 @@ int main(int argc, char const *argv[])
 
 
 ## 二、迷宫问题
+
+[GitHub链接](https://github.com/dingxinliang88/hhu-iot-code-sophomore/tree/master/data_structure/maze_solve)
 
 **mazeApp.c**
 ```c

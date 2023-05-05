@@ -7,6 +7,8 @@
 
 ## 一、队列
 
+[GitHub链接](https://github.com/dingxinliang88/hhu-iot-code-sophomore/tree/master/data_structure/common_queue)
+
 **queue.h**
 ```c
 #ifndef _QUEUE_H_
@@ -219,6 +221,8 @@ int main(int argc, char const *argv[])
 
 
 ## 二、循环队列
+
+[GitHub链接](https://github.com/dingxinliang88/hhu-iot-code-sophomore/tree/master/data_structure/cycle_queue)
 
 **queue.h**
 

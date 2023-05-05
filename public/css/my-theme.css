@@ -66,12 +66,13 @@
   --blockquote-font-size: inherit;
   --blockquote-font-style: normal;
   --blockquote-font-weight: normal;
-  --blockquote-quotes-close: "”";
+  /* --blockquote-quotes-close: "”"; */
   --blockquote-quotes-color: var(--mono-tint5);
   --blockquote-quotes-font-family: Georgia, serif;
   --blockquote-quotes-font-size: 4rem;
-  --blockquote-quotes-open: "“";
+  /* --blockquote-quotes-open: "“"; */
   --blockquote-padding: 1.5rem;
+
 
   /* Code */
   --code-font-family: Monaco;

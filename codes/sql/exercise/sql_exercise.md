@@ -1141,3 +1141,318 @@ mysql> select e.ename,e.sal,d.dname
 +-------+---------+------------+
 4 rows in set (0.01 sec)
 ```
+
+## 25、列出在每个部门工作的员工数量, 平均工资和平均服务期限
+ 
+> 在MySQL中如何计算两个日期的“年差”
+> => `TimeStampDiff(type, pre_date, post_date)`
+> 例如：`timestampdiff(YEAR, hiredate, now());`
+>
+> 间隔类型（type）
+> - SECOND 秒
+> - MINUTE 分钟
+> - HOUR 小时
+> - DAY 天
+> - WEEK 星期
+> - MOUTH 月
+> - QUARTER 季度
+> - YEAR 年
+>
+
+```sql
+select
+    d.deptno,
+    count(e.ename) ecount,
+    ifnull(avg(e.sal), 0) as avgsal,
+    ifnull(
+        avg(
+            timestampdiff(YEAR, hiredate, now())
+        ),
+        0
+    ) as avgservicetime
+from emp e
+    right join dept d on e.deptno = d.deptno
+group by d.deptno;
+```
+
+```sh
+mysql> select d.deptno, count(e.ename) ecount,ifnull(avg(e.sal),0) as avgsal, ifnull(avg(timestampdiff(YEAR, hiredate, now())), 0) as avgservicetime
+    -> from emp e
+    -> right join dept d
+    -> on e.deptno = d.deptno
+    -> group by d.deptno;
++--------+--------+-------------+----------------+
+| deptno | ecount | avgsal      | avgservicetime |
++--------+--------+-------------+----------------+
+|     10 |      3 | 2916.666667 |        41.0000 |
+|     20 |      5 | 2175.000000 |        39.2000 |
+|     30 |      6 | 1566.666667 |        41.5000 |
+|     40 |      0 |    0.000000 |         0.0000 |
++--------+--------+-------------+----------------+
+4 rows in set (0.00 sec)
+```
+
+## 26、列出所有员工的姓名、部门名称和工资
+
+```sql
+select e.ename, d.dname, e.sal
+from emp e
+    left join dept d on e.deptno = d.deptno;
+```
+
+```sh
+mysql> select e.ename, d.dname, e.sal
+    -> from emp e
+    -> left join dept d
+    -> on e.deptno = d.deptno;
++--------+------------+---------+
+| ename  | dname      | sal     |
++--------+------------+---------+
+| SMITH  | RESEARCH   |  800.00 |
+| ALLEN  | SALES      | 1600.00 |
+| WARD   | SALES      | 1250.00 |
+| JONES  | RESEARCH   | 2975.00 |
+| MARTIN | SALES      | 1250.00 |
+| BLAKE  | SALES      | 2850.00 |
+| CLARK  | ACCOUNTING | 2450.00 |
+| SCOTT  | RESEARCH   | 3000.00 |
+| KING   | ACCOUNTING | 5000.00 |
+| TURNER | SALES      | 1500.00 |
+| ADAMS  | RESEARCH   | 1100.00 |
+| JAMES  | SALES      |  950.00 |
+| FORD   | RESEARCH   | 3000.00 |
+| MILLER | ACCOUNTING | 1300.00 |
++--------+------------+---------+
+14 rows in set (0.00 sec)
+```
+
+## 27、列出所有部门的详细信息和人数
+
+```sql
+select
+    d.deptno,
+    d.dname,
+    d.loc,
+    count(e.ename)
+from emp e
+    right join dept d on e.deptno = d.deptno
+group by deptno;
+```
+
+```sh
+mysql> select d.deptno, d.dname, d.loc, count(e.ename)
+    -> from emp e
+    -> right join dept d
+    -> on e.deptno = d.deptno
+    -> group by deptno;
++--------+------------+----------+----------------+
+| deptno | dname      | loc      | count(e.ename) |
++--------+------------+----------+----------------+
+|     10 | ACCOUNTING | NEW YORK |              3 |
+|     20 | RESEARCH   | DALLAS   |              5 |
+|     30 | SALES      | CHICAGO  |              6 |
+|     40 | OPERATIONS | BOSTON   |              0 |
++--------+------------+----------+----------------+
+4 rows in set (0.00 sec)
+```
+
+## 28、列出各种工作的最低工资及从事此工作的雇员姓名
+
+Step1: 查出工作及其的最低工资
+
+```sql
+select job, min(sal) as minSal from emp  group by job;
+```
+
+```sh
+mysql> select job, min(sal) as minSal from emp  group by job;
++-----------+---------+
+| job       | minSal  |
++-----------+---------+
+| CLERK     |  800.00 |
+| SALESMAN  | 1250.00 |
+| MANAGER   | 2450.00 |
+| ANALYST   | 3000.00 |
+| PRESIDENT | 5000.00 |
++-----------+---------+
+5 rows in set (0.00 sec)
+```
+
+Step2: emp和Step1查询结果联合查询
+
+条件：`e.sal = t.minSal and e.job = t.job`
+
+```sql
+select e.ename, t.*
+from emp e
+    join (
+        select job, min(sal) as minSal
+        from emp
+        group by
+            job
+    ) t on e.job = t.job
+    and e.sal = t.minSal;
+```
+
+
+```sh
+mysql> select e.ename, t.*
+    -> from emp e
+    -> join (select job, min(sal) as minSal from emp  group by job) t
+    -> on e.job = t.job and e.sal = t.minSal;
++--------+-----------+---------+
+| ename  | job       | minSal  |
++--------+-----------+---------+
+| SMITH  | CLERK     |  800.00 |
+| WARD   | SALESMAN  | 1250.00 |
+| MARTIN | SALESMAN  | 1250.00 |
+| CLARK  | MANAGER   | 2450.00 |
+| SCOTT  | ANALYST   | 3000.00 |
+| KING   | PRESIDENT | 5000.00 |
+| FORD   | ANALYST   | 3000.00 |
++--------+-----------+---------+
+7 rows in set (0.00 sec)
+```
+
+## 29、列出各个部门的MANAGER(领导)的最低薪金
+
+```sql
+select
+    deptno,
+    min(sal) as minSal
+from emp
+where job = 'MANAGER'
+group by deptno;
+```
+
+```sh
+mysql> select deptno, min(sal) as minSal from emp where job = 'MANAGER' group by deptno;
++--------+---------+
+| deptno | minSal  |
++--------+---------+
+|     20 | 2975.00 |
+|     30 | 2850.00 |
+|     10 | 2450.00 |
++--------+---------+
+3 rows in set (0.00 sec)
+```
+
+## 30、列出所有员工的年工资, 按年薪从低到高排序
+
+> 注：年薪按照12薪算
+
+```sql
+select
+    ename, (sal + ifnull(comm, 0)) * 12 as yearSal
+from emp
+order by yearSal;
+```
+
+```sh
+mysql> select ename, (sal + ifnull(comm, 0)) * 12 as yearSal
+    -> from emp
+    -> order by yearSal;
++--------+----------+
+| ename  | yearSal  |
++--------+----------+
+| SMITH  |  9600.00 |
+| JAMES  | 11400.00 |
+| ADAMS  | 13200.00 |
+| MILLER | 15600.00 |
+| TURNER | 18000.00 |
+| WARD   | 21000.00 |
+| ALLEN  | 22800.00 |
+| CLARK  | 29400.00 |
+| MARTIN | 31800.00 |
+| BLAKE  | 34200.00 |
+| JONES  | 35700.00 |
+| SCOTT  | 36000.00 |
+| FORD   | 36000.00 |
+| KING   | 60000.00 |
++--------+----------+
+14 rows in set (0.00 sec)
+```
+
+## 31、求出员工领导的薪水超过3000的员工名称与领导
+
+```sql
+select
+    a.ename '员工',
+    b.ename '领导'
+from emp a
+    join emp b on a.mgr = b.empno
+where b.sal > 3000;
+```
+
+```sh
+mysql> select a.ename '员工',b.ename '领导'
+    -> from emp a
+    -> join emp b
+    -> on a.mgr = b.empno
+    -> where b.sal > 3000;
++--------+--------+
+| 员工   | 领导   |
++--------+--------+
+| JONES  | KING   |
+| BLAKE  | KING   |
+| CLARK  | KING   |
++--------+--------+
+3 rows in set (0.01 sec)
+```
+
+## 32、求出部门名称中带'S'字符的部门员工的工资合计、部门人数
+
+```sql
+select
+    d.deptno,
+    d.dname,
+    d.loc,
+    count(e.ename) as deptCount,
+    ifnull(sum(sal), 0) as sumSal
+from emp e
+    right join dept d on e.deptno = d.deptno
+where d.dname like '%S%'
+group by
+    d.deptno,
+    d.dname,
+    d.loc;
+```
+
+```sh
+mysql> select d.deptno, d.dname, d.loc, count(e.ename) as deptCount, ifnull(sum(sal), 0) as sumSal
+    -> from emp e
+    -> right join dept d
+    -> on e.deptno = d.deptno 
+    -> where d.dname like '%S%'
+    -> group by d.deptno, d.dname, d.loc;
++--------+------------+---------+-----------+----------+
+| deptno | dname      | loc     | deptCount | sumSal   |
++--------+------------+---------+-----------+----------+
+|     20 | RESEARCH   | DALLAS  |         5 | 10875.00 |
+|     30 | SALES      | CHICAGO |         6 |  9400.00 |
+|     40 | OPERATIONS | BOSTON  |         0 |     0.00 |
++--------+------------+---------+-----------+----------+
+3 rows in set (0.01 sec)
+```
+
+## 33、给任职日期超过30年的员工加薪10%
+
+```sql
+update emp
+set sal = sal * 1.1
+where
+    timestampdiff(YEAR, hiredate, now()) > 30;
+```
+
+```sh
+mysql> update emp 
+    -> set sal = sal * 1.1
+    -> where timestampdiff(YEAR, hiredate, now()) > 30;
+Query OK, 14 rows affected (0.01 sec)
+Rows matched: 14  Changed: 14  Warnings: 0
+```
+
+> 没有啦，没有啦~~
+> 
+> 总共33道SQL练习题，如果还嫌不够，那就来做一道面试题吧
+> 👉[点我去做SQL面试题](/codes/sql/exercise/sql_extra_exer.md)👈

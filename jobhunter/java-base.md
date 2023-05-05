@@ -241,3 +241,70 @@ Java反射的缺点：
 - Lock提供了公平锁和非公平锁的机制，公平锁是指线程竞争锁资源的时候，如果已经有其他线程正在排队等待锁释放，那么当前竞争锁资源的线程无法插队。非公平锁就是不管是否有线程在排队等待锁，他都会尝试去竞争一次锁。Synchronized只提供了一种非公平锁的实现
 
 3）性能方面：Synchronized和Lock在性能层面差别不大，在实现上会有一些区别，Synchronized引入偏向锁、轻量级锁、重量级锁和锁升级的方式来优化锁的性能，而Lock中则使用到了自旋锁的方式来实现性能优化。
+
+# String\#intern方法的作用
+
+```java
+/**
+* Returns a canonical representation for the string object.
+* <p>
+* A pool of strings, initially empty, is maintained privately by the
+* class {@code String}.
+* <p>
+* When the intern method is invoked, if the pool already contains a
+* string equal to this {@code String} object as determined by
+* the {@link #equals(Object)} method, then the string from the pool is
+* returned. Otherwise, this {@code String} object is added to the
+* pool and a reference to this {@code String} object is returned.
+* <p>
+* It follows that for any two strings {@code s} and {@code t},
+* {@code s.intern() == t.intern()} is {@code true}
+* if and only if {@code s.equals(t)} is {@code true}.
+* <p>
+* All literal strings and string-valued constant expressions are
+* interned. String literals are defined in section 3.10.5 of the
+* <cite>The Java&trade; Language Specification</cite>.
+*
+* @return  a string that has the same contents as this string, but is
+*          guaranteed to be from a pool of unique strings.
+* @jls 3.10.5 String Literals
+*/
+public native String intern();
+```
+
+`String#intern()`是一个native方法，起作用是将指定的字符串对象的引用保存在字符串常量池中，可以简单分为以下两种情况：
+
+- 如果字符串常量池中保存了对应的字符串对象的引用，就直接返回该引用
+- 如果字符串常量池没有保存对应的字符串对象的引用，呢就在常量池中创建一个指向该字符串对象的引用并返回
+
+Demo（JDK11）
+
+```java
+public class Demo {
+  public static void main(String[] args) {
+    // 在堆中创建字符串对象”Java“
+    // 将字符串对象”Java“的引用保存在字符串常量池中
+    String s1 = "Java";
+    // 直接返回字符串常量池中字符串对象”Java“对应的引用
+    String s2 = s1.intern();
+    // 会在堆中在单独创建一个字符串对象
+    String s3 = new String("Java");
+    // 直接返回字符串常量池中字符串对象”Java“对应的引用
+    String s4 = s3.intern();
+    // s1 和 s2 指向的是堆中的同一个对象
+    System.out.println(s1 == s2); // true
+    // s3 和 s4 指向的是堆中不同的对象
+    System.out.println(s3 == s4); // false
+    // s1 和 s4 指向的是堆中的同一个对象
+    System.out.println(s1 == s4); //true
+  }
+}
+```
+
+output
+
+```
+true
+false
+true
+```
