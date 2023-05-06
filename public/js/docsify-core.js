@@ -10,7 +10,7 @@ window.$docsify = {
     "/.*/_sidebar.md": "/_sidebar.md",
   },
   subMaxLevel: 3,
-  sidebarDisplayLevel: 2, // set sidebar display level
+  sidebarDisplayLevel: 2,
   auto2top: true,
   notFoundPage: "/_404.md",
   // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件

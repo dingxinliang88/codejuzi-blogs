@@ -1,7 +1,7 @@
 <!-- _sidebar.md -->
 * 写在最前面
   * [前言](README.md)
-  * [本站搭建](/create_blog/doc.md)
+  * [本站搭建](/create_doc/doc.md)
 
 * 随笔
   * [2023年再读《孔乙己》有感](/docs/eassys/Feelings_from_reading_KongYiji.md)

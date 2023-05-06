@@ -245,30 +245,6 @@ Java反射的缺点：
 # String\#intern方法的作用
 
 ```java
-/**
-* Returns a canonical representation for the string object.
-* <p>
-* A pool of strings, initially empty, is maintained privately by the
-* class {@code String}.
-* <p>
-* When the intern method is invoked, if the pool already contains a
-* string equal to this {@code String} object as determined by
-* the {@link #equals(Object)} method, then the string from the pool is
-* returned. Otherwise, this {@code String} object is added to the
-* pool and a reference to this {@code String} object is returned.
-* <p>
-* It follows that for any two strings {@code s} and {@code t},
-* {@code s.intern() == t.intern()} is {@code true}
-* if and only if {@code s.equals(t)} is {@code true}.
-* <p>
-* All literal strings and string-valued constant expressions are
-* interned. String literals are defined in section 3.10.5 of the
-* <cite>The Java&trade; Language Specification</cite>.
-*
-* @return  a string that has the same contents as this string, but is
-*          guaranteed to be from a pool of unique strings.
-* @jls 3.10.5 String Literals
-*/
 public native String intern();
 ```
 
@@ -308,3 +284,17 @@ true
 false
 true
 ```
+
+# 接口和抽象类有什么共同点和区别？
+
+**共同点：**
+
+1. 都不能被实例化
+2. 都可以包含抽象方法
+3. 都可以有默认实现的方法（Java8可以使用`default`关键字在接口中定义默认方法）
+
+**区别：**
+
+1. 接口主要用于对类的行为进行约束，实现了某个接口就具有了对应的行为；抽象类主要是用于代码复用，强调的是所属关系
+2. 一个类只能继承一个类，但是可以实现多个接口
+3. 接口中的成员变量只能是`public static final`类型的，不能被修改且必须有初始值，而抽象类的成员变量默认为`default`，可在子类中被重新定义，也可被重新赋值
