@@ -86,7 +86,61 @@ mkdir -p bin && gcc -Wall -g -o bin/app.out $(find ./test_work_space/ -name '*.c
 > TIPS：可以根据自己的需要客制化命令，上述配置支持多文件编译
 
 
-
 ## 3、调试
 
 在需要调试的地方打断点，按下`F5`启动调试即可
+
+## 4、改进
+`task.json`
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "mkdir -p bin && gcc -Wall -g -o ${workspaceFolder}/bin/app.out $(find ${workspaceFolder}/${relativeFileDirname}/ -name '*.c')",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
+```
+
+上述task.json可以获取当前窗口文件所在文件夹，动态编译，不需要在手动指定编译文件夹
+
+作者的目录结构
+
+```sh
+.
+├── bin             # 编译后的文件夹
+│   ├── app.out
+│   └── app.out.dSYM
+├── common_queue    # project （module)
+│   ├── app.c       # main.c
+│   ├── queue.c
+│   └── queue.h
+├── common_stack
+│   ├── app.c
+│   ├── stack.c
+│   └── stack.h
+├── cycle_queue
+│   ├── app.c
+│   ├── queue.c
+│   └── queue.h
+├── maze_solve
+│   └── mazeApp.c
+├── single_llist_with_head
+│   ├── app.c
+│   ├── structure.c
+│   └── structure.h
+└── single_llist_withnot_head
+    ├── app.c
+    ├── structure.c
+    └── structure.h
+
+```
