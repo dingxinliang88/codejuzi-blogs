@@ -298,3 +298,59 @@ true
 1. 接口主要用于对类的行为进行约束，实现了某个接口就具有了对应的行为；抽象类主要是用于代码复用，强调的是所属关系
 2. 一个类只能继承一个类，但是可以实现多个接口
 3. 接口中的成员变量只能是`public static final`类型的，不能被修改且必须有初始值，而抽象类的成员变量默认为`default`，可在子类中被重新定义，也可被重新赋值
+
+
+
+# 如何使用`try-with-resources`代替`try-catch-finally`?
+
+1. 适用范围（资源的定义）：任何实现`java.lang.AutoCloseable`或者 `java.io.Closeable` 的对象
+2. 关闭资源与finally块的执行顺序：在`try-with-resource`中，任何catch和finally语句在声明的资源关闭后执行
+
+
+【栗子🌰】：单个资源
+
+`try-catch-finally`
+
+```java
+//读取文本文件的内容
+Scanner scanner = null;
+try {
+  scanner = new Scanner(new File("D://read.txt"));
+  while (scanner.hasNext()) {
+    System.out.println(scanner.nextLine());
+  }
+} catch (FileNotFoundException e) {
+  e.printStackTrace();
+} finally {
+  if (scanner != null) {
+    scanner.close();
+  }
+}
+```
+
+=> `try-with-resources`（Java7之后）
+
+```java
+try (Scanner scanner = new Scanner(new File("test.txt"))) {
+  while (scanner.hasNext()) {
+    System.out.println(scanner.nextLine());
+  }
+} catch (FileNotFoundException fnfe) {
+  fnfe.printStackTrace();
+}
+```
+
+【栗子🌰】：多个资源
+
+```java
+try (BufferedInputStream bin = new BufferedInputStream(new FileInputStream(new File("test.txt")));
+     BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(new File("out.txt")))) {
+  int b;
+  while ((b = bin.read()) != -1) {
+    bout.write(b);
+  }
+}
+catch (IOException e) {
+  e.printStackTrace();
+}
+```
