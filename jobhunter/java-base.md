@@ -354,3 +354,33 @@ catch (IOException e) {
   e.printStackTrace();
 }
 ```
+
+# finally中的代码一定会执行吗？
+
+不一定。在某些情况下，finally块中的代码不会被执行。
+
+1. finally之前虚拟机被终止运行，finally中的代码不会被执行
+
+	```java
+	try {
+	  System.out.println("Try to do something");
+	  throw new RuntimeException("RuntimeException");
+	} catch (Exception e) {
+	  System.out.println("Catch Exception -> " + e.getMessage());
+	  // 终止当前正在运行的Java虚拟机
+	  System.exit(1);
+	} finally {
+	  System.out.println("Finally");
+	}
+	```
+
+	Output:
+
+	```
+	Try to do something
+	Catch Exception -> RuntimeException
+	```
+
+2. 程序所在的线程死亡
+
+3. 关闭CPU
