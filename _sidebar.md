@@ -15,6 +15,7 @@
 
 * 面试题（CodeJuzi）
   * [Java基础](/jobhunter/java-base.md)
+  * [Java集合](/jobhunter/java-collection.md)
 
 * 技术书籍阅读
   * 《Redis设计与实现》
