@@ -38,6 +38,9 @@
   * [由浅入深学Git_2](/docs/gitdocs/learn_git_2.md)
   * [由浅入深学Git_3](/docs/gitdocs/learn_git_3.md)
 
+* Docker
+  * [Docker搭建Redis集群](/docs/docker/Docker_Redis_Cluster.md)
+
 * SQL
     * [SQL练习](/codes/sql/exercise/sql_exercise.md)
     * [附加练习题](/codes/sql/exercise/sql_extra_exer.md)
