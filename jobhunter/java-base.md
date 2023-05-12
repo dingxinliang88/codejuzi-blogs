@@ -384,3 +384,13 @@ catch (IOException e) {
 2. 程序所在的线程死亡
 
 3. 关闭CPU
+
+# Java访问修饰符public、private、protected，以及无修饰符(默认)的区别
+
+|  修饰符   | 当前类 | 同包 | 子包 | 其他包 |
+| :-------: | :----: | :--: | :--: | :----: |
+|  public   |   √    |  √   |  √   |   √    |
+| protected |   √    |  √   |  √   |   ×    |
+|  default  |   √    |  √   |  ×   |   ×    |
+|  private  |   √    |  ×   |  ×   |   ×    |
+
