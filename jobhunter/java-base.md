@@ -387,10 +387,24 @@ catch (IOException e) {
 
 # Java访问修饰符public、private、protected，以及无修饰符(默认)的区别
 
-|  修饰符   | 当前类 | 同包 | 子包 | 其他包 |
-| :-------: | :----: | :--: | :--: | :----: |
-|  public   |   √    |  √   |  √   |   √    |
-| protected |   √    |  √   |  √   |   ×    |
-|  default  |   √    |  √   |  ×   |   ×    |
-|  private  |   √    |  ×   |  ×   |   ×    |
+|  修饰符   | 当前类 | 同包  | 子包  | 其他包 |
+| :-------: | :----: | :---: | :---: | :----: |
+|  public   |   √    |   √   |   √   |   √    |
+| protected |   √    |   √   |   √   |   ×    |
+|  default  |   √    |   √   |   ×   |   ×    |
+|  private  |   √    |   ×   |   ×   |   ×    |
 
+
+# JDK、JRE、JVM分别是什么，有什么区别？
+
+1）JDK（Java Development Kit）：JDK是**Java开发工具包**，包含了编写、编译、调试和运行Java程序所需的所有工具和组件，比如编译器（javac）、JavaAPI、调试工具等。JDK是针对Java开发人员的，**它包含JRE**，还有编译器和其它工具，可以用来编写和调试Java程序
+
+2）JRE（Java Runtime Environment）：JRE是**Java运行时环境**，**包括了Java虚拟机（JVM）和Java标准类库（Java API）**。JRE是针对Java应用程序的，它**提供了在计算机上运行Java应用程序所需要的最小环境**。
+
+3）JVM（Java Vitual Machine）：JVM是**Java虚拟机**，是Java程序运行的环境。JVM负责将Java代码解释或者编译为本地机器代码，并在运行时提供必要的环境支持，比如内存管理、垃圾回收、安全性等。JVM的主要作用是**将Java代码转换为可以在计算机上运行的机器码**，**并负责程序的执行**。
+
+综述：
+
+- **JDK是Java开发工具包**，包括了编译器、Java API、调试工具等，用于开发Java应用程序
+- **JRE是Java运行时环境**，包括了Java虚拟机和Java标准类库，用于在计算机上运行Java应用程序
+- **JVM是Java虚拟机**，是Java程序运行的环境，负责将Java代码转换为可以在计算机上运行的机器码，并提供必要的环境支持
