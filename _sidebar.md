@@ -57,6 +57,7 @@
   * [linked-list](/codes/datastructure/linked_list.md)
   * [stack](/codes/datastructure/stack.md)
   * [queue](/codes/datastructure/queue.md)
+  * [tree](/codes/datastructure/tree.md)
 
 * Vuejs
   * [Vue2-Notes](/docs/frontend/vue/Vue2_Notes.md)
