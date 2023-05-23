@@ -52,6 +52,7 @@
   * [Linux安装PostgreSQL14](/docs/envconfig/Linux_Install_PostgreSQL14.md)
   * [Windows安装MySQL8](/docs/envconfig/Windows_Install_MySQL8.md)
   * [Windows安装Maven](/docs/envconfig/Windows_Install_Maven.md)
+  * [Linux安装Nginx](/docs/envconfig/Linux_Install_Nginx.md)
 
 * 数据结构
   * [linked-list](/codes/datastructure/linked_list.md)
