@@ -33,6 +33,10 @@
   * [多个C文件编译](/docs/codetips/C_Compile_Mul_Files.md)
   * [帖子评论表设计](/docs/codetips/Comment_Post_Table_Design.md)
 
+
+* 实战篇
+  * [腾讯云COS对象存储服务实战（头像相关）](/docs/operations/Tencent_COS.md)
+
 * GitDocs
   * [由浅入深学Git_1](/docs/gitdocs/learn_git_1.md)
   * [由浅入深学Git_2](/docs/gitdocs/learn_git_2.md)
