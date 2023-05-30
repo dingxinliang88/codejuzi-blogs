@@ -2,9 +2,94 @@
 
 > 环境
 >
+> - Parallel Desktop
 > - Ubuntu 22.04 arm64
 
-# 编译安装 Nginx：
+
+
+# 默认安装NGINX
+
+1. 打开终端并更新软件包列表：
+
+	```
+	sudo apt-get update
+	```
+
+2. 安装Nginx：
+
+	```
+	sudo apt-get install nginx
+	```
+
+3. 启动Nginx服务：
+
+	```
+	sudo systemctl start nginx
+	```
+
+4. 确认Nginx是否正在运行：
+
+	```
+	sudo systemctl status nginx
+	```
+
+	如果Nginx正在运行，输出应该类似于：
+
+	```
+	● nginx.service - A high performance web server and a reverse proxy server
+	Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+	Active: active (running) since Mon 2023-05-29 17:30:02 UTC; 1 day 19h ago
+	...
+	```
+
+5. 配置防火墙以允许HTTP流量（如果需要）：
+
+	```
+	sudo ufw allow 'Nginx HTTP'
+	```
+
+6. 在Web浏览器中输入服务器的IP地址或域名，就能看到nginx的启动页面了
+
+
+
+## NGINX的目录
+
+Nginx 的二进制文件通常被安装在 `/usr/sbin/nginx` 路径下
+
+```sh
+parallels@ubuntu-linux-22-04-desktop:~$ ll /usr/sbin/nginx
+-rwxr-xr-x 1 root root 1211240 Nov 10  2022 /usr/sbin/nginx*
+
+```
+
+配置文件和其他相关文件通常被安装在 `/etc/nginx` 目录下，其中包括：
+
+- `/etc/nginx/nginx.conf` 主配置文件
+- `/etc/nginx/sites-available` 存放应用站点的目录
+- `/etc/nginx/sites-enabled` 存放启用站点符号链接的目录
+
+```sh
+parallels@ubuntu-linux-22-04-desktop:/etc/nginx$ tree -L 1 .
+.
+├── conf.d
+├── fastcgi.conf
+├── fastcgi_params
+├── koi-utf
+├── koi-win
+├── mime.types
+├── modules-available
+├── modules-enabled
+├── nginx.conf
+├── proxy_params
+├── scgi_params
+├── sites-available
+├── sites-enabled
+├── snippets
+├── uwsgi_params
+└── win-utf
+```
+
+# 编译安装 Nginx
 
 1. 安装编译 Nginx 所需的依赖库：
 
@@ -115,7 +200,7 @@
 
 5. 配置开机自启：`sudo systemctl enable nginx.service`
 
-# Docker 安装 Nginx：
+# Docker 安装 Nginx
 
 1. 下载并运行 Nginx 镜像：
 
