@@ -10,8 +10,6 @@
   * [Redis开发规范——键值设计](/docs/codeguides/redis_guides/key-value_design.md)
   * [Redis开发规范——命令使用](/docs/codeguides/redis_guides/common_use.md)
 
-* Software Design Pattern
-  * [看懂UML图](/docs/design_pattern/understand_UML_diagrams.md)
 
 * 面试题（CodeJuzi）
   * [Java基础](/jobhunter/java-base.md)
@@ -25,7 +23,9 @@
     * [整数集合](/books/Redis_Design_Impl/IntSet.md)
     * [跳表](/books/Redis_Design_Impl/SkipList.md)
   * 《设计模式之禅》
+    * [看懂UML图](/books/Zen_of_Design_Patterns/understand_UML_diagrams.md)
     * [6大设计原则](/books/Zen_of_Design_Patterns/design_principles.md)
+    * [单例模式](/books/Zen_of_Design_Patterns/singleton.md)
 
 * Code Tips
   * [CodeTips](/docs/codetips/CodeTips.md)

@@ -69,15 +69,6 @@ window.$docsify = {
     language: "chinese",
     isExpected: true,
   },
-  /* date */
-  // formatUpdated: "{YYYY}/{MM}/{DD} {HH}:{mm}",
-  // plugins: [
-  //   function (hook, vm) {
-  //     hook.beforeEach(function (html) {
-  //       return html + "\n\n\n\n----\n" + "📅 Post @ {docsify-updated}";
-  //     });
-  //   },
-  // ],
   /* process */
   progress: {
     position: "top",
