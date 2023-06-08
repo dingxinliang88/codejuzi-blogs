@@ -63,6 +63,7 @@
   * [stack](/codes/datastructure/stack.md)
   * [queue](/codes/datastructure/queue.md)
   * [tree](/codes/datastructure/tree.md)
+  * [quick-sort](/codes/datastructure/quick_sort.md)
 
 * Vuejs
   * [Vue2-Notes](/docs/frontend/vue/Vue2_Notes.md)
