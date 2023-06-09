@@ -26,6 +26,7 @@
     * [看懂UML图](/books/Zen_of_Design_Patterns/understand_UML_diagrams.md)
     * [6大设计原则](/books/Zen_of_Design_Patterns/design_principles.md)
     * [单例模式](/books/Zen_of_Design_Patterns/singleton.md)
+    * [工厂方法模式](/books/Zen_of_Design_Patterns/factory_method.md)
 
 * Code Tips
   * [CodeTips](/docs/codetips/CodeTips.md)
